@@ -19,5 +19,16 @@
   "bugs": {
     "url": "https://github.com/MeloGuo/Sight-Vue/issues"
   },
-  "homepage": "https://github.com/MeloGuo/Sight-Vue#readme"
+  "homepage": "https://github.com/MeloGuo/Sight-Vue#readme",
+  "dependencies": {
+    "vue": "^2.5.17"
+  },
+  "devDependencies": {
+    "cz-conventional-changelog": "^2.1.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  }
 }
