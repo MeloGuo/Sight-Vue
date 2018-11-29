@@ -23,15 +23,18 @@
     vertical-align: middle;
     > .s-button {
       border-radius: 0;
+      &:not(:first-child) {
+        margin-left: -1px;
+      }
       &:first-child {
         border-top-left-radius: var(--border-radius);
         border-bottom-left-radius: var(--border-radius);
-        margin-right: -1px;
+        /*<!--margin-right: -1px;-->*/
       }
       &:last-child {
         border-top-right-radius: var(--border-radius);
         border-bottom-right-radius: var(--border-radius);
-        margin-left: -1px;
+        /*<!--margin-left: -1px;-->*/
       }
       &:hover {
         position: relative;
