@@ -6,7 +6,14 @@
 
 <script>
   export default {
-
+    mounted () {
+      for (const node of this.$el.children) {
+        const name = node.nodeName.toLowerCase()
+        if (name !== 'button') {
+          console.warn(`s-button-group 的子元素应该均为 s-button，但是你写的是 ${name}`)
+        }
+      }
+    }
   }
 </script>
 
