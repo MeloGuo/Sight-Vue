@@ -21,12 +21,19 @@
   },
   "homepage": "https://github.com/MeloGuo/Sight-Vue#readme",
   "dependencies": {
-    "vue": "^2.5.17"
+    "vue": "^2.5.17",
+    "vue-hot-reload-api": "^2.3.1"
   },
   "devDependencies": {
+    "@vue/component-compiler-utils": "^2.3.0",
     "cz-conventional-changelog": "^2.1.0",
     "eslint": "^5.9.0",
-    "parcel-bundler": "^1.10.3"
+    "parcel-bundler": "^1.10.3",
+    "sass": "^1.15.1",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "alias": {
+    "vue": "./node_modules/vue/dist/vue.common.js"
   },
   "config": {
     "commitizen": {
