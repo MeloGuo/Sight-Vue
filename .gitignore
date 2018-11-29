@@ -2,6 +2,10 @@
 # Created by https://www.gitignore.io/api/vuejs,macos,webstorm
 # Edit at https://www.gitignore.io/?templates=vuejs,macos,webstorm
 
+### parcel ###
+dist/
+.cache/
+
 ### macOS ###
 # General
 .DS_Store
