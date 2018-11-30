@@ -43,7 +43,7 @@ describe('Button组件', () => {
       }
     }).$mount(div)
     const icon = vm.$el.querySelector('svg')
-    expect(getComputedStyle(icon).order).to.eq('1')
+    expect(window.getComputedStyle(icon).order).to.eq('1')
     vm.$el.remove()
     vm.$destroy()
   })
@@ -58,7 +58,7 @@ describe('Button组件', () => {
       }
     }).$mount(div)
     const icon = vm.$el.querySelector('svg')
-    expect(getComputedStyle(icon).order).to.eq('2')
+    expect(window.getComputedStyle(icon).order).to.eq('2')
     vm.$el.remove()
     vm.$destroy()
   })

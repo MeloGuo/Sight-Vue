@@ -55,7 +55,8 @@
   },
   "standard": {
     "ignore": [
-      "dist/"
+      "dist/",
+      "test/"
     ]
   }
 }
