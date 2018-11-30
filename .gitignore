@@ -37,7 +37,6 @@ Temporary Items
 ### Vuejs ###
 node_modules
 docs/_book
-test/
 
 ### WebStorm ###
 # Covers JetBrains IDEs: IntelliJ, RubyMine, PhpStorm, AppCode, PyCharm, CLion, Android Studio and WebStorm
