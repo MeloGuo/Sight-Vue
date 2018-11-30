@@ -17,7 +17,10 @@ const vm = new Vue({
 })
 
 // 单元测试
-import { expect } from 'chai'
+import chai, { expect } from 'chai'
+import spies from 'chai-spies'
+chai.use(spies)
+
 {
   const Constructor = Vue.extend(Button)
   const vm = new Constructor({
@@ -91,9 +94,9 @@ import { expect } from 'chai'
     }
   })
   vm.$mount()
-  vm.$on('click', function () {
-    console.log(1)
-  })
+  const spy = chai.spy(function () {})
+  vm.$on('click', spy)
   const button = vm.$el
   button.click()
+  expect(spy).to.have.been.called()
 }
