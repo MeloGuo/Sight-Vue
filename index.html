@@ -39,7 +39,7 @@
     }
 
     .box {
-      margin: 20px;
+      margin: 20px 0;
     }
   </style>
 </head>
@@ -51,7 +51,11 @@
     <s-input value="李菁" readonly></s-input>
   </div>
   <div class="box">
-    <s-input value="曹云金" error="智商不能太低"></s-input>
+    <s-input value="曹云金" error="请输入正确的内容"></s-input>
+  </div>
+  <div class="box">
+    <s-input v-model="message"></s-input>
+    <p>{{ message }}</p>
   </div>
   <div style="margin-top: 20px;">
     <s-button :loading="true" @click="loading1 = !loading1">
