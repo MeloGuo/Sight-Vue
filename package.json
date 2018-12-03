@@ -57,7 +57,8 @@
   "standard": {
     "ignore": [
       "dist/",
-      "test/"
+      "test/",
+			"src/svg.js"
     ]
   }
 }
