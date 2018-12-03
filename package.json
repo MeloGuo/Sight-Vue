@@ -4,6 +4,7 @@
   "description": "这是一个Vue的UI库",
   "main": "dist/index.js",
   "scripts": {
+		"start": "parcel index.html --no-cache",
     "dev-test": "parcel watch test/* --no-cache & karma start",
     "test": "standard --env mocha && parcel build test/* --no-cache --no-minify && karma start --single-run"
   },
