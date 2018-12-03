@@ -6,6 +6,7 @@
 
 <script>
   export default {
+    name: 'SightButtonGroup',
     mounted () {
       for (const node of this.$el.children) {
         const name = node.nodeName.toLowerCase()
@@ -17,7 +18,7 @@
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .s-button-group {
     display: inline-flex;
     vertical-align: middle;
