@@ -30,6 +30,10 @@
       xs: {
         type: Object,
         validator
+      },
+      sm: {
+        type: Object,
+        validator
       }
     },
     data () {
@@ -39,16 +43,21 @@
     },
     computed: {
       colClasses () {
-        const {span, offset, xs} = this
+        const {span, offset, xs, sm} = this
         let xsClass = []
+        let smClass = []
         if (xs) {
           xsClass = [`col-xs-${xs.span}`, `offset-xs-${xs.offset}`]
+        }
+        if (sm) {
+          smClass = [`col-sm-${sm.span}`, `offset-sm-${sm.offset}`]
         }
 
         return [
           span && `col-${span}`,
           offset && `offset-${offset}`,
-          ...xsClass
+          ...xsClass,
+          ...smClass
         ]
       },
       gutterStyle () {
@@ -80,7 +89,7 @@
       }
     }
 
-    @media (max-width: 575px) {
+    @media (max-width: 576px) {
       $prefix: col-xs-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -90,6 +99,22 @@
 
       $prefix: offset-xs-; /* TODO:解决 offset-xs-undefined 的问题 */
       @for $n from 0 through 24 {
+        &.#{$prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 577px) and (max-width: 768px) {
+      $prefix: col-sm-;
+      @for $n from 1 through 24 {
+        &.#{$prefix}#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+
+      $prefix: offset-sm-;
+      @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
           margin-left: ($n / 24) * 100%;
         }
