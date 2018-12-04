@@ -1,5 +1,5 @@
 <template>
-  <div class="col" :class="[span && `col-${span}`]">
+  <div class="col" :class="[span && `col-${span}`, offset && `offset-${offset}`]">
     <slot></slot>
   </div>
 </template>
@@ -9,6 +9,13 @@
     name: 'SightCol',
     props: {
       span: {
+        type: [Number, String],
+        validator (value) {
+          value = parseInt(value)
+          return value > 0 && value <= 24
+        }
+      },
+      offset: {
         type: [Number, String],
         validator (value) {
           value = parseInt(value)
@@ -30,6 +37,13 @@
     @for $n from 1 through 24 {
       &.#{$prefix}#{$n} {
         width: ($n / 24) * 100%;
+      }
+    }
+
+    $prefix: offset-;
+    @for $n from 1 through 24 {
+      &.#{$prefix}#{$n} {
+        margin-left: ($n / 24) * 100%;
       }
     }
   }
