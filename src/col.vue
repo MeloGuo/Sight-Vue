@@ -49,7 +49,6 @@
 
 <style scoped lang="scss">
   .col {
-    height: 100px;
     width: 100%;
 
     $prefix: col-;
