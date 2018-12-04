@@ -1,6 +1,9 @@
 <template>
-  <div class="col" :class="[span && `col-${span}`, offset && `offset-${offset}`]">
-    <slot></slot>
+  <div class="col" :class="[span && `col-${span}`, offset && `offset-${offset}`]"
+    :style="gutterStyle">
+    <div class="col-inner">
+      <slot></slot>
+    </div>
   </div>
 </template>
 
@@ -22,6 +25,20 @@
           return value > 0 && value <= 24
         }
       }
+    },
+    data () {
+      return {
+        gutter: 0
+      }
+    },
+    computed: {
+      gutterStyle () {
+        const padding = this.gutter / 2 + 'px'
+        return {
+          paddingLeft: padding,
+          paddingRight: padding
+        }
+      }
     }
   }
 </script>
@@ -29,9 +46,13 @@
 <style scoped lang="scss">
   .col {
     height: 100px;
-    background-color: grey;
     width: 100%;
-    border: 1px solid red;
+
+    .col-inner {
+      border: 1px solid red;
+      height: 100px;
+      background-color: grey;
+    }
 
     $prefix: col-;
     @for $n from 1 through 24 {

@@ -37,20 +37,8 @@
       margin: 20px 0;
     }
 
-    .row {
-      display: flex;
-    }
-    .col {
-      height: 100px;
-      width: 100%;
-      border: 1px solid red;
-      background-color: grey;
-    }
-    .col[data-span="2"] {
-      width: 12%;
-    }
-    .col[data-span="22"] {
-      width: 88%;
+    .grid {
+      border: 1px solid black;
     }
   </style>
 
@@ -74,7 +62,7 @@
       <s-col span="20">cool</s-col>
       <s-col span="2">cool</s-col>
     </s-row>
-    <s-row gutter="2">
+    <s-row gutter="20">
       <s-col>lol</s-col>
       <s-col>lol</s-col>
       <s-col>lol</s-col>
