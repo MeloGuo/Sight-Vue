@@ -33,18 +33,42 @@
     }
   </style>
   <style>
-    .icon {
-      width: 1em;
-      height: 1em;
-    }
-
     .box {
       margin: 20px 0;
     }
+
+    .row {
+      display: flex;
+    }
+    .col {
+      height: 100px;
+      width: 100%;
+      border: 1px solid red;
+      background-color: grey;
+    }
+    .col[data-span="2"] {
+      width: 12%;
+    }
+    .col[data-span="22"] {
+      width: 88%;
+    }
   </style>
+
 </head>
 <body>
 <div id="app">
+  <div class="grid">
+    <s-row>
+      <s-col span="2">cool</s-col>
+      <s-col span="22">cool</s-col>
+    </s-row>
+    <s-row>
+      <s-col>lol</s-col>
+      <s-col>lol</s-col>
+      <s-col>lol</s-col>
+    </s-row>
+  </div>
+
   <div class="box">
     <s-input value="郭德纲"></s-input>
     <s-input value="何云伟" disabled></s-input>
