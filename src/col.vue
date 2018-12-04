@@ -1,9 +1,6 @@
 <template>
-  <div class="col" :class="[span && `col-${span}`, offset && `offset-${offset}`]"
-    :style="gutterStyle">
-    <div class="col-inner">
-      <slot></slot>
-    </div>
+  <div class="col" :class="colClasses" :style="gutterStyle">
+    <slot></slot>
   </div>
 </template>
 
@@ -32,6 +29,13 @@
       }
     },
     computed: {
+      colClasses () {
+        const { span, offset } = this
+        return [
+          span && `col-${span}`,
+          offset && `offset-${offset}`
+        ]
+      },
       gutterStyle () {
         const padding = this.gutter / 2 + 'px'
         return {
@@ -47,12 +51,6 @@
   .col {
     height: 100px;
     width: 100%;
-
-    .col-inner {
-      border: 1px solid red;
-      height: 100px;
-      background-color: grey;
-    }
 
     $prefix: col-;
     @for $n from 1 through 24 {
