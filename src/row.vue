@@ -1,5 +1,5 @@
 <template>
-  <div class="row" :style="gutterStyle">
+  <div class="row" :class="rowClasses" :style="gutterStyle">
     <slot></slot>
   </div>
 </template>
@@ -11,6 +11,30 @@
       gutter: {
         type: [Number, String],
         default: 0
+      },
+      justify: {
+        type: String,
+        default: 'start',
+        validator (value) {
+          return [
+            'start',
+            'end',
+            'center',
+            'space-around',
+            'space-between'
+          ].includes(value)
+        }
+      },
+      align: {
+        type: String,
+        default: 'top',
+        validator (value) {
+          return [
+            'top',
+            'middle',
+            'bottom'
+          ].includes(value)
+        }
       }
     },
     mounted () {
@@ -25,6 +49,13 @@
           marginLeft: margin,
           marginRight: margin
         }
+      },
+      rowClasses () {
+        const { justify, align } = this
+        return [
+          `row-${justify}`,
+          `row-${align}`
+        ]
       }
     }
   }
@@ -33,5 +64,30 @@
 <style scoped lang="scss">
   .row {
     display: flex;
+
+    &.row-start {
+      justify-content: start;
+    }
+    &.row-end {
+      justify-content: flex-end;
+    }
+    &.row-center {
+      justify-content: center;
+    }
+    &.row-space-around {
+      justify-content: space-around;
+    }
+    &.row-space-between {
+      justify-content: space-between;
+    }
+    &.row-top {
+      align-items: flex-start;
+    }
+    &.row-center {
+      align-items: center;
+    }
+    &.row-bottom {
+      align-items: flex-end;
+    }
   }
 </style>
