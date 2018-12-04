@@ -63,6 +63,7 @@
 <style scoped lang="scss">
   .row {
     display: flex;
+    flex-wrap: wrap;
 
     &.row-start {
       justify-content: start;
