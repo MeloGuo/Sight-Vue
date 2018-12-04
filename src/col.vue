@@ -1,5 +1,5 @@
 <template>
-  <div class="col" :class="[`col-${span}`]">
+  <div class="col" :class="[span && `col-${span}`]">
     <slot></slot>
   </div>
 </template>
@@ -23,7 +23,7 @@
   .col {
     height: 100px;
     background-color: grey;
-    width: 50%;
+    width: 100%;
     border: 1px solid red;
 
     $prefix: col-;
