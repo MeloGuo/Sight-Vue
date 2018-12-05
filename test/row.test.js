@@ -9,7 +9,6 @@ Vue.config.devtools = false
 
 describe('Row', () => {
   const RowConstructor = Vue.extend(Row)
-  const ColConstructor = Vue.extend(Col)
   let vm
 
   it('存在', () => {
