@@ -73,7 +73,7 @@
           result.push(`col-${str}${obj.span}`)
         }
         if (obj.offset) {
-          result.push(`offset-${str}${obj.span}`)
+          result.push(`offset-${str}${obj.offset}`)
         }
         return result
       }
