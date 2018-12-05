@@ -40,6 +40,11 @@
     .grid {
       border: 1px solid black;
     }
+    .demo {
+      background: #ddd;
+      border: 1px solid #666;
+      height: 100px;
+    }
   </style>
 
 </head>
@@ -47,25 +52,24 @@
 <div id="app">
   <div class="grid">
     <s-row>
-      <s-col>cool</s-col>
-    </s-row>
-    <s-row>
-      <s-col span="2">cool</s-col>
-      <s-col span="22">cool</s-col>
-    </s-row>
-    <s-row>
-      <s-col span="2">cool</s-col>
-      <s-col span="20" offset="2">cool</s-col>
-    </s-row>
-    <s-row>
-      <s-col span="2">cool</s-col>
-      <s-col span="20">cool</s-col>
-      <s-col span="2">cool</s-col>
-    </s-row>
-    <s-row gutter="20">
-      <s-col>lol</s-col>
-      <s-col>lol</s-col>
-      <s-col>lol</s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
     </s-row>
   </div>
 

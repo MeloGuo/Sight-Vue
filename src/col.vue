@@ -62,34 +62,34 @@
         gutter: 0 // 从父组件 Row 接收 gutter 值
       }
     },
+    methods: {
+      createClasses (obj, str = '') {
+        if (!obj) {
+          return []
+        }
+
+        const result = []
+        if (obj.span) {
+          result.push(`col-${str}${obj.span}`)
+        }
+        if (obj.offset) {
+          result.push(`offset-${str}${obj.span}`)
+        }
+        return result
+      }
+    },
     computed: {
       colClasses () {
         const {span, offset, xs, sm, md, lg, xl, xxl} = this
-        const classes = []
-
-        if (xs) {
-          classes.push(...[`col-xs-${xs.span}`, `offset-xs-${xs.offset}`])
-        }
-        if (sm) {
-          classes.push(...[`col-sm-${sm.span}`, `offset-sm-${sm.offset}`])
-        }
-        if (md) {
-          classes.push(...[`col-md-${md.span}`, `offset-md-${md.offset}`])
-        }
-        if (lg) {
-          classes.push(...[`col-lg-${lg.span}`, `offset-lg-${lg.offset}`])
-        }
-        if (xl) {
-          classes.push(...[`col-xl-${xl.span}`, `offset-xl-${xl.offset}`])
-        }
-        if (xxl) {
-          classes.push(...[`col-xxl-${xxl.span}`, `offset-xxl-${xxl.offset}`])
-        }
-
+        const createClasses = this.createClasses
         return [
-          span && `col-${span}`,
-          offset && `offset-${offset}`,
-          ...classes
+          ...createClasses({span, offset}),
+          ...createClasses(xs, 'xs-'),
+          ...createClasses(sm, 'sm-'),
+          ...createClasses(md, 'md-'),
+          ...createClasses(lg, 'lg-'),
+          ...createClasses(xl, 'xl-'),
+          ...createClasses(xxl, 'xxl-')
         ]
       },
       gutterStyle () {
