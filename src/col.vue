@@ -34,6 +34,22 @@
       sm: {
         type: Object,
         validator
+      },
+      md: {
+        type: Object,
+        validator
+      },
+      lg: {
+        type: Object,
+        validator
+      },
+      xl: {
+        type: Object,
+        validator
+      },
+      xxl: {
+        type: Object,
+        validator
       }
     },
     data () {
@@ -43,21 +59,32 @@
     },
     computed: {
       colClasses () {
-        const {span, offset, xs, sm} = this
-        let xsClass = []
-        let smClass = []
+        const {span, offset, xs, sm, md, lg, xl, xxl} = this
+        const classes = []
+
         if (xs) {
-          xsClass = [`col-xs-${xs.span}`, `offset-xs-${xs.offset}`]
+          classes.push(...[`col-xs-${xs.span}`, `offset-xs-${xs.offset}`])
         }
         if (sm) {
-          smClass = [`col-sm-${sm.span}`, `offset-sm-${sm.offset}`]
+          classes.push(...[`col-sm-${sm.span}`, `offset-sm-${sm.offset}`])
+        }
+        if (md) {
+          classes.push(...[`col-md-${md.span}`, `offset-md-${md.offset}`])
+        }
+        if (lg) {
+          classes.push(...[`col-lg-${lg.span}`, `offset-lg-${lg.offset}`])
+        }
+        if (xl) {
+          classes.push(...[`col-xl-${xl.span}`, `offset-xl-${xl.offset}`])
+        }
+        if (xxl) {
+          classes.push(...[`col-xxl-${xxl.span}`, `offset-xxl-${xxl.offset}`])
         }
 
         return [
           span && `col-${span}`,
           offset && `offset-${offset}`,
-          ...xsClass,
-          ...smClass
+          ...classes
         ]
       },
       gutterStyle () {
@@ -83,13 +110,13 @@
     }
 
     $prefix: offset-;
-    @for $n from 1 through 24 {
+    @for $n from 0 through 24 {
       &.#{$prefix}#{$n} {
         margin-left: ($n / 24) * 100%;
       }
     }
 
-    @media (max-width: 576px) {
+    @media (max-width: 575px) {
       $prefix: col-xs-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -105,7 +132,7 @@
       }
     }
 
-    @media (min-width: 577px) and (max-width: 768px) {
+    @media (min-width: 576px) and (max-width: 767px) {
       $prefix: col-sm-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -114,8 +141,68 @@
       }
 
       $prefix: offset-sm-;
+      @for $n from 0 through 24 {
+        &.#{$prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 768px) and (max-width: 991px) {
+      $prefix: col-md-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+
+      $prefix: offset-md-;
+      @for $n from 0 through 24 {
+        &.#{$prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 992px) and (max-width: 1199px) {
+      $prefix: col-lg-;
+      @for $n from 1 through 24 {
+        &.#{$prefix}#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+
+      $prefix: offset-lg-;
+      @for $n from 0 through 24 {
+        &.#{$prefix}#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 1200px) and (max-width: 1599px) {
+      @for $n from 1 through 24 {
+        &.col-xl-#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+
+      @for $n from 0 through 24 {
+        &.offset-xl-#{$n} {
+          margin-left: ($n / 24) * 100%;
+        }
+      }
+    }
+
+    @media (min-width: 1600px) {
+      @for $n from 1 through 24 {
+        &.col-xxl-#{$n} {
+          width: ($n / 24) * 100%;
+        }
+      }
+
+      @for $n from 0 through 24 {
+        &.offset-xxl-#{$n} {
           margin-left: ($n / 24) * 100%;
         }
       }
