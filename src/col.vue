@@ -5,6 +5,11 @@
 </template>
 
 <script>
+  /**
+   * 判断传入响应式属性key的值
+   * @param value
+   * @returns {boolean}
+   */
   const validator = function (value) {
     let keys = Object.keys(value)
     return keys.every((key) => ['span', 'offset'].includes(key))
@@ -54,7 +59,7 @@
     },
     data () {
       return {
-        gutter: 0
+        gutter: 0 // 从父组件 Row 接收 gutter 值
       }
     },
     computed: {
@@ -100,6 +105,8 @@
 
 <style scoped lang="scss">
   .col {
+    ///////////////
+    /* 默认 span */
     width: 100%;
 
     $prefix: col-;
@@ -115,24 +122,29 @@
         margin-left: ($n / 24) * 100%;
       }
     }
+    /* 默认 span */
+    //////////////
 
-    @media (max-width: 575px) {
-      $prefix: col-xs-;
-      @for $n from 1 through 24 {
-        &.#{$prefix}#{$n} {
-          width: ($n / 24) * 100%;
-        }
-      }
-
-      $prefix: offset-xs-; /* TODO:解决 offset-xs-undefined 的问题 */
-      @for $n from 0 through 24 {
-        &.#{$prefix}#{$n} {
-          margin-left: ($n / 24) * 100%;
-        }
+    ///////////////
+    /* xs span */
+    $prefix: col-xs-;
+    @for $n from 1 through 24 {
+      &.#{$prefix}#{$n} {
+        width: ($n / 24) * 100%;
       }
     }
 
-    @media (min-width: 576px) and (max-width: 767px) {
+    $prefix: offset-xs-;
+    @for $n from 0 through 24 {
+      &.#{$prefix}#{$n} {
+        margin-left: ($n / 24) * 100%;
+      }
+    }
+    /* xs span */
+    /////////////
+
+
+    @media (min-width: 576px) {
       $prefix: col-sm-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -140,7 +152,7 @@
         }
       }
 
-      $prefix: offset-sm-;
+      $prefix: offset-sm-; /* TODO:解决 offset-xs-undefined 的问题 */
       @for $n from 0 through 24 {
         &.#{$prefix}#{$n} {
           margin-left: ($n / 24) * 100%;
@@ -148,7 +160,7 @@
       }
     }
 
-    @media (min-width: 768px) and (max-width: 991px) {
+    @media (min-width: 768px) {
       $prefix: col-md-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -164,7 +176,7 @@
       }
     }
 
-    @media (min-width: 992px) and (max-width: 1199px) {
+    @media (min-width: 992px) {
       $prefix: col-lg-;
       @for $n from 1 through 24 {
         &.#{$prefix}#{$n} {
@@ -180,7 +192,7 @@
       }
     }
 
-    @media (min-width: 1200px) and (max-width: 1599px) {
+    @media (min-width: 1200px) {
       @for $n from 1 through 24 {
         &.col-xl-#{$n} {
           width: ($n / 24) * 100%;
