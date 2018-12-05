@@ -33,61 +33,74 @@
     }
   </style>
   <style>
+    .box {
+      margin: 20px 0;
+    }
+
+    .grid {
+      border: 1px solid black;
+    }
     .demo {
+      background: #ddd;
       border: 1px solid #666;
-      min-height: 100px;
-    }
-
-    .sider {
-      background: #333;
-      width: 200px;
-    }
-
-    .header {
-      background: #999;
       height: 100px;
     }
-
-    .footer {
-      background: #ccc;
-      height: 50px;
-    }
   </style>
+
 </head>
 <body>
 <div id="app">
-  <s-layout style="height: 100vh;">
-    <s-header class="demo">Header</s-header>
-    <s-content class="demo">Content</s-content>
-    <s-footer class="demo">Footer</s-footer>
-  </s-layout>
+  <div class="grid">
+    <s-row>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+      <s-col span="24" :md="{span: 8}">
+        <div class="demo"></div>
+      </s-col>
+    </s-row>
+  </div>
 
-  <s-layout style="height: 100vh;">
-    <s-header class="demo">Header</s-header>
-    <s-layout>
-      <s-sider class="demo">Sider</s-sider>
-      <s-content class="demo">Content</s-content>
-    </s-layout>
-    <s-footer class="demo">Footer</s-footer>
-  </s-layout>
-
-  <s-layout style="height: 100vh;">
-    <s-header class="demo">Header</s-header>
-    <s-layout>
-      <s-content class="demo">Content</s-content>
-      <s-sider class="demo">Sider</s-sider>
-    </s-layout>
-    <s-footer class="demo">Footer</s-footer>
-  </s-layout>
-
-  <s-layout style="height: 100vh;">
-    <s-sider class="demo">Sider</s-sider>
-    <s-layout>
-      <s-header>Header</s-header>
-      <s-content>Content</s-content>
-      <s-footer>Footer</s-footer>
-    </s-layout>
-  </s-layout>
+  <div class="box">
+    <s-input value="郭德纲"></s-input>
+    <s-input value="何云伟" disabled></s-input>
+    <s-input value="李菁" readonly></s-input>
+  </div>
+  <div class="box">
+    <s-input value="曹云金" error="请输入正确的内容"></s-input>
+  </div>
+  <div class="box">
+    <s-input v-model="message"></s-input>
+    <p>{{ message }}</p>
+  </div>
+  <div style="margin-top: 20px;">
+    <s-button :loading="true" @click="loading1 = !loading1">
+      按钮
+    </s-button>
+    <s-button icon="setting" :loading="loading2" @click="loading2 = !loading2">
+      按钮
+    </s-button>
+    <s-button icon="setting" :loading="loading3" @click="loading3 = !loading3" icon-position="right">
+      按钮
+    </s-button>
+    <s-button-group>
+      <s-button icon="left">上一页</s-button>
+      <s-button>更多</s-button>
+      <s-button icon="right">下一页</s-button>
+    </s-button-group>
+  </div>
 </div>
 
 <script src="./src/app.js"></script>
