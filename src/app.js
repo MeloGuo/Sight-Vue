@@ -5,6 +5,7 @@ import ButtonGroup from './button-group'
 import Input from './input'
 import Col from './col'
 import Row from './row'
+import plugin from './plugin'
 
 Vue.component('s-button', Button)
 Vue.component('s-icon', Icon)
@@ -12,6 +13,7 @@ Vue.component('s-button-group', ButtonGroup)
 Vue.component('s-input', Input)
 Vue.component('s-col', Col)
 Vue.component('s-row', Row)
+Vue.use(plugin)
 
 const vm = new Vue({
   el: '#app',
@@ -22,8 +24,8 @@ const vm = new Vue({
     message: 'hi'
   },
   methods: {
-    handleInput (event) {
-      console.log(event)
+    handleToast () {
+      this.$toast('日你娘')
     }
   }
 })
