@@ -23,9 +23,17 @@ const vm = new Vue({
     loading3: false,
     message: 'hi'
   },
+  created () {
+    this.handleToast()
+  },
   methods: {
     handleToast () {
-      this.$toast('日你娘')
+      this.$toast('天气不错天气不错天气不错天气不错' +
+        '天气不错天气不错天气不错天气不错天气不错天气不错天气不错天气不错' +
+        '天气不错天气不错天气不错天气不错天气不错天气不错' +
+        '', {
+        autoClose: false
+      })
     }
   }
 })
