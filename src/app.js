@@ -24,14 +24,10 @@ const vm = new Vue({
     message: 'hi'
   },
   created () {
-    this.handleToast()
   },
   methods: {
     handleToast () {
-      this.$toast('天气不错天气不错天气不错天气不错' +
-        '天气不错天气不错天气不错天气不错天气不错天气不错天气不错天气不错' +
-        '天气不错天气不错天气不错天气不错天气不错天气不错' +
-        '', {
+      this.$toast('天气', {
         autoClose: false,
         position: 'middle'
       })
