@@ -9,8 +9,8 @@
         <div class="line" ref="line">
         </div>
         <span class="close" @click="onClickClose">
-        {{ closeButton.text }}
-      </span>
+          {{ closeButton.text }}
+        </span>
       </template>
     </div>
   </div>
