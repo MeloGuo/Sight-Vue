@@ -1,17 +1,20 @@
 <template>
-  <div class="toast" ref="wrapper" :class="toastClasses">
-    <div class="message">
-      <slot v-if="!enableHtml"></slot>
-      <div v-else v-html="$slots.default[0]"></div>
-    </div>
-    <template v-if="closeButton">
-      <div class="line" ref="line">
+  <div class="wrapper" :class="toastClasses">
+    <div class="toast" ref="toast">
+      <div class="message">
+        <slot v-if="!enableHtml"></slot>
+        <div v-else v-html="$slots.default[0]"></div>
       </div>
-      <span class="close" @click="onClickClose">
+      <template v-if="closeButton">
+        <div class="line" ref="line">
+        </div>
+        <span class="close" @click="onClickClose">
         {{ closeButton.text }}
       </span>
-    </template>
+      </template>
+    </div>
   </div>
+
 </template>
 
 <script>
@@ -70,7 +73,7 @@
       updateStyles () {
         this.$nextTick(() => {
           this.$refs.line.style.height =
-            `${this.$refs.wrapper.getBoundingClientRect().height}px`
+            `${this.$refs.toast.getBoundingClientRect().height}px`
         })
       },
       close () {
@@ -92,70 +95,98 @@
   $font-size: 14px;
   $toast-min-height: 40px;
   $toast-bg: rgba(0, 0, 0, 0.75);
-  @keyframes middle-fade-in {
+  @keyframes fade-in {
     0% {
       opacity: 0;
     }
     100% {
-      opacity: 100%;
+      opacity: 1;
     }
   }
 
-  @keyframes bottom-fade-in {
+  @keyframes slide-up {
     0% {
       opcity: 0;
-      transform: translateY(0%);
+      transform: translateY(100%);
     }
     100% {
-      opacity: 100%;
-      transform: translateY(100%);
+      opacity: 1;
+      transform: translateY(0%);
     }
   }
 
-  .toast {
-    font-size: $font-size;
-    min-height: $toast-min-height;
-    line-height: 1.8;
-    color: #fff;
+  @keyframes slide-down {
+    0% {
+      opacity: 0;
+      transform: translateY(-100%);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0%);
+    }
+  }
+
+  .wrapper {
     position: fixed;
     left: 50%;
-    display: flex;
-    align-items: center;
-    background-color: $toast-bg;
-    border-radius: 4px;
-    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.50);
-    padding: 0 16px;
+    transform: translateX(-50%);
+    $animation-duration: 300ms;
 
     &.position-top {
       top: 0;
-      transform: translateX(-50%);
+
+      .toast {
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
+        animation: slide-down $animation-duration;
+      }
     }
 
     &.position-middle {
       top: 50%;
       transform: translate(-50%, -50%);
-      animation: middle-fade-in .5s;
+
+      .toast {
+        animation: fade-in $animation-duration;
+      }
     }
 
     &.position-bottom {
       bottom: 0;
-      transform: translateX(-50%);
-      animation: bottom-fade-in .5s;
+
+      .toast {
+        border-bottom-left-radius: 0;
+        border-bottom-right-radius: 0;
+        animation: slide-up $animation-duration;
+      }
     }
 
-    > .message {
-      padding: 6px 0;
-    }
+    .toast {
+      font-size: $font-size;
+      min-height: $toast-min-height;
+      line-height: 1.8;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      background-color: $toast-bg;
+      border-radius: 4px;
+      box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.50);
+      padding: 0 16px;
 
-    > .close {
-      padding-left: 16px;
-      flex-shrink: 0;
-    }
+      > .message {
+        padding: 6px 0;
+      }
 
-    > .line {
-      height: 100%;
-      border-left: 1px solid #cccccc;
-      margin-left: 16px;
+      > .close {
+        padding-left: 16px;
+        flex-shrink: 0;
+      }
+
+      > .line {
+        height: 100%;
+        border-left: 1px solid #cccccc;
+        margin-left: 16px;
+      }
     }
   }
 </style>

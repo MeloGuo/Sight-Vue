@@ -26,9 +26,19 @@ const vm = new Vue({
   created () {
   },
   methods: {
-    handleToast () {
-      this.$toast('天气', {
-        autoClose: false,
+    showToast1 () {
+      this.$toast('你好', {
+        position: 'top',
+        autoClose: false
+      })
+    },
+    showToast2 () {
+      this.$toast('你好', {
+        position: 'middle'
+      })
+    },
+    showToast3 () {
+      this.$toast('你好', {
         position: 'bottom'
       })
     }
