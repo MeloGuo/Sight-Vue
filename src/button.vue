@@ -25,7 +25,7 @@
         type: String,
         default: 'left',
         validator (direction) {
-          return ['left', 'right'].includes(direction)
+          return ['left', 'right'].indexOf(direction) > -1
         }
       }
     }

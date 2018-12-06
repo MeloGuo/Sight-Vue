@@ -12,7 +12,7 @@
    */
   const validator = function (value) {
     let keys = Object.keys(value)
-    return keys.every((key) => ['span', 'offset'].includes(key))
+    return keys.every((key) => ['span', 'offset'].indexOf(key) > -1)
   }
 
   export default {

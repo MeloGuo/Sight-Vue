@@ -21,7 +21,7 @@
             'center',
             'space-around',
             'space-between'
-          ].includes(value)
+          ].indexOf(value) > -1
         }
       },
       align: {
@@ -32,7 +32,7 @@
             'top',
             'middle',
             'bottom'
-          ].includes(value)
+          ].indexOf(value) > -1
         }
       }
     },
