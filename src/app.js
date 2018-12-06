@@ -32,7 +32,8 @@ const vm = new Vue({
         '天气不错天气不错天气不错天气不错天气不错天气不错天气不错天气不错' +
         '天气不错天气不错天气不错天气不错天气不错天气不错' +
         '', {
-        autoClose: false
+        autoClose: false,
+        position: 'middle'
       })
     }
   }
