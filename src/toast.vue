@@ -92,6 +92,26 @@
   $font-size: 14px;
   $toast-min-height: 40px;
   $toast-bg: rgba(0, 0, 0, 0.75);
+  @keyframes middle-fade-in {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 100%;
+    }
+  }
+
+  @keyframes bottom-fade-in {
+    0% {
+      opcity: 0;
+      transform: translateY(0%);
+    }
+    100% {
+      opacity: 100%;
+      transform: translateY(100%);
+    }
+  }
+
   .toast {
     font-size: $font-size;
     min-height: $toast-min-height;
@@ -114,11 +134,13 @@
     &.position-middle {
       top: 50%;
       transform: translate(-50%, -50%);
+      animation: middle-fade-in .5s;
     }
 
     &.position-bottom {
       bottom: 0;
       transform: translateX(-50%);
+      animation: bottom-fade-in .5s;
     }
 
     > .message {

@@ -29,7 +29,7 @@ const vm = new Vue({
     handleToast () {
       this.$toast('天气', {
         autoClose: false,
-        position: 'middle'
+        position: 'bottom'
       })
     }
   }
