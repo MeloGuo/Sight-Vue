@@ -75,6 +75,7 @@
       },
       close () {
         this.$el.remove()
+        this.$emit('close') // 清空外部 currentToast
         this.$destroy()
       },
       onClickClose () {
