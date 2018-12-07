@@ -6,7 +6,7 @@
 
 <script>
   export default {
-    name: 'SightHeader.'
+    name: 'SightHeader'
   }
 </script>
 
