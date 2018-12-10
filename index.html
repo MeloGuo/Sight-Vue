@@ -35,33 +35,36 @@
 </head>
 <body>
 <div id="app">
-  <s-tabs :selected.sync="selectedTab">
-    <s-tabs-head>
-      <template slot="actions">
-        <div>设置</div>
-      </template>
-      <s-tabs-item name="woman" disabled>
-        美女
-      </s-tabs-item>
-      <s-tabs-item name="finance">
-        财经
-      </s-tabs-item>
-      <s-tabs-item name="basketball">
-        篮球
-      </s-tabs-item>
-    </s-tabs-head>
-    <s-tabs-body>
-      <s-tabs-pane name="woman">
-        相关美女
-      </s-tabs-pane>
-      <s-tabs-pane name="finance">
-        相关财经
-      </s-tabs-pane>
-      <s-tabs-pane name="basketball">
-        相关篮球
-      </s-tabs-pane>
-    </s-tabs-body>
+  <s-tabs>
+    <div>hi</div>
   </s-tabs>
+  <!--<s-tabs :selected.sync="selectedTab">-->
+    <!--<s-tabs-head>-->
+      <!--<template slot="actions">-->
+        <!--<div>设置</div>-->
+      <!--</template>-->
+      <!--<s-tabs-item name="woman" disabled>-->
+        <!--美女-->
+      <!--</s-tabs-item>-->
+      <!--<s-tabs-item name="finance">-->
+        <!--财经-->
+      <!--</s-tabs-item>-->
+      <!--<s-tabs-item name="basketball">-->
+        <!--篮球-->
+      <!--</s-tabs-item>-->
+    <!--</s-tabs-head>-->
+    <!--<s-tabs-body>-->
+      <!--<s-tabs-pane name="woman">-->
+        <!--相关美女-->
+      <!--</s-tabs-pane>-->
+      <!--<s-tabs-pane name="finance">-->
+        <!--相关财经-->
+      <!--</s-tabs-pane>-->
+      <!--<s-tabs-pane name="basketball">-->
+        <!--相关篮球-->
+      <!--</s-tabs-pane>-->
+    <!--</s-tabs-body>-->
+  <!--</s-tabs>-->
 </div>
 
 <script src="./src/app.js"></script>
