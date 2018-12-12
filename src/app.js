@@ -35,6 +35,9 @@ const vm = new Vue({
   created () {
   },
   methods: {
+    yyy: function () {
+      console.log('yyy')
+    }
   }
 })
 console.log(vm)
