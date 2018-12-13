@@ -36,7 +36,7 @@
         this.$refs.popover.addEventListener('mouseleave', this.close)
       }
     },
-    destroyed () {
+    beforeDestroy () {
       this.$refs.popover.removeEventListener('click', this.onClick)
       this.$refs.popover.removeEventListener('mouseenter', this.open)
       this.$refs.popover.removeEventListener('mouseleave', this.close)
@@ -44,22 +44,6 @@
     data () {
       return {
         visible: false
-      }
-    },
-    computed: {
-      openEvent () {
-        if (this.trigger === 'click') {
-          return 'click'
-        } else {
-          return 'mouseenter'
-        }
-      },
-      closeEvent () {
-        if (this.trigger === 'click') {
-          return 'click'
-        } else {
-          return 'mouseleave'
-        }
       }
     },
     methods: {
@@ -158,6 +142,7 @@
 
       &::before, &::after {
         left: 10px;
+        border-bottom: none;
       }
 
       &::before {
@@ -177,6 +162,7 @@
 
       &::before, &::after {
         left: 10px;
+        border-top: none;
       }
 
       &::before {
@@ -198,6 +184,7 @@
       &::before, &::after {
         transform: translateY(-50%);
         top: 50%;
+        border-right: none;
       }
 
       &::before {
@@ -219,6 +206,7 @@
       &::before, &::after {
         transform: translateY(-50%);
         top: 50%;
+        border-left: none;
       }
 
       &::before {
