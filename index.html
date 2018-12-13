@@ -36,18 +36,30 @@
 <body>
 <div id="app" style="padding: 100px;">
   <div @click="yyy">
+    <s-popover position="left">
+      <template slot="content">
+        <div>我出现啦</div>
+      </template>
+      <s-button>你丫哟</s-button>
+    </s-popover>
+    <s-popover position="bottom">
+      <template slot="content">
+        <div>coolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcool</div>
+      </template>
+      <s-button>点我试试</s-button>
+    </s-popover>
     <s-popover>
-    <template slot="content">
-      <div>coolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcoolcool</div>
-    </template>
-    <s-button>点我试试</s-button>
-  </s-popover>
-  <s-popover>
-    <template slot="content">
-      <div>我出现啦</div>
-    </template>
-    <s-button>你丫哟</s-button>
-  </s-popover>
+      <template slot="content">
+        <div>我出现啦</div>
+      </template>
+      <s-button>你丫哟</s-button>
+    </s-popover>
+    <s-popover position="right">
+      <template slot="content">
+        <div>啊啊啊啊</div>
+      </template>
+      <s-button>发达</s-button>
+    </s-popover>
   </div>
 </div>
 
