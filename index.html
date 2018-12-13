@@ -49,8 +49,8 @@
       <s-button>点我试试</s-button>
     </s-popover>
     <s-popover>
-      <template slot="content">
-        <div>我出现啦</div>
+      <template slot="content" slot-scope="{ close }">
+        <div>我出现啦</div><s-button @click="close">关闭</s-button>
       </template>
       <s-button>你丫哟</s-button>
     </s-popover>
