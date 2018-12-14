@@ -1,6 +1,6 @@
 <template>
   <div class="collapse-item">
-    <div class="title" @click="switchContent">
+    <div class="title" @click="onClick">
       {{title}}
     </div>
     <div class="content" v-if="open">
@@ -12,6 +12,7 @@
 <script>
   export default {
     name: 'SightCollapseItem',
+    inject: ['eventBus'],
     props: {
       title: {
         type: String,
@@ -23,9 +24,20 @@
         open: false
       }
     },
+    mounted () {
+      this.eventBus && this.eventBus.$on('update:selected', (vm) => {
+        if (vm !== this) {
+          this.open = false
+        }
+      })
+    },
     methods: {
-      switchContent () {
+      switch () {
         this.open = !this.open
+      },
+      onClick () {
+        this.switch()
+        this.eventBus && this.eventBus.$emit('update:selected', this)
       }
     }
   }
