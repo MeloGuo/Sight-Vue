@@ -34,7 +34,7 @@ Vue.component('s-collapse-item', CollapseItem)
 const vm = new Vue({
   el: '#app',
   data: {
-    selectedTab: '1'
+    selectedTab: ['1', '2']
   },
   created () {
   },

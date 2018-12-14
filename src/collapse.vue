@@ -15,7 +15,8 @@
         default: false
       },
       selected: {
-        type: String
+        type: Array,
+        default: []
       }
     },
     data () {
@@ -24,17 +25,46 @@
       }
     },
     provide () {
-      if (this.accordion) {
-        return {
-          eventBus: this.eventBus
-        }
+      return {
+        eventBus: this.eventBus
       }
     },
     mounted () {
       this.eventBus.$emit('update:selected', this.selected)
-      this.eventBus.$on('update:selected', (name) => {
-        this.$emit('update:selected', name)
-      })
+      this.listenAddSelected()
+      this.listenRemoveSelected()
+    },
+    methods: {
+      deepCopySelected () {
+        return JSON.parse(JSON.stringify(this.selected))
+      },
+      emitSelected (selectedCopy) {
+        this.eventBus.$emit('update:selected', selectedCopy)
+        this.$emit('update:selected', selectedCopy)
+      },
+      listenAddSelected () {
+        this.eventBus.$on('update:addSelected', (name) => {
+          let selectedCopy = this.deepCopySelected()
+
+          if (this.accordion) {
+            selectedCopy = [name]
+          } else {
+            selectedCopy.push(name)
+          }
+
+          this.emitSelected(selectedCopy)
+        })
+      },
+      listenRemoveSelected () {
+        this.eventBus.$on('update:removeSelected', (name) => {
+          let selectedCopy = this.deepCopySelected()
+
+          const index = selectedCopy.indexOf(name)
+          selectedCopy.splice(index, 1)
+
+          this.emitSelected(selectedCopy)
+        })
+      }
     }
   }
 </script>
