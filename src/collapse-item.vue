@@ -3,7 +3,7 @@
     <div class="title" @click="onClick">
       {{title}}
     </div>
-    <div class="content" v-if="open">
+    <div class="content" v-if="isOpen">
       <slot></slot>
     </div>
   </div>
@@ -17,27 +17,34 @@
       title: {
         type: String,
         required: true
+      },
+      name: {
+        type: String
       }
     },
     data () {
       return {
-        open: false
+        isOpen: false
       }
     },
     mounted () {
-      this.eventBus && this.eventBus.$on('update:selected', (vm) => {
-        if (vm !== this) {
-          this.open = false
+      this.eventBus && this.eventBus.$on('update:selected', (name) => {
+        if (name !== this.name) {
+          this.close()
+        } else {
+          this.open()
         }
       })
     },
     methods: {
-      switch () {
-        this.open = !this.open
+      close () {
+        this.isOpen = false
+      },
+      open () {
+        this.isOpen = true
       },
       onClick () {
-        this.switch()
-        this.eventBus && this.eventBus.$emit('update:selected', this)
+        this.eventBus && this.eventBus.$emit('update:selected', this.name)
       }
     }
   }
