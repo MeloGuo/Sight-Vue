@@ -4,9 +4,11 @@
   "description": "这是一个Vue的UI库",
   "main": "dist/index.js",
   "scripts": {
-		"start": "parcel index.html --no-cache",
+    "start": "parcel index.html --no-cache",
     "dev-test": "parcel watch test/* --no-cache & karma start",
-    "test": "standard --env mocha && parcel build test/* --no-cache --no-minify && karma start --single-run"
+    "test": "standard --env mocha && parcel build test/* --no-cache --no-minify && karma start --single-run",
+    "docs-dev": "vuepress dev docs",
+    "docs-build": "vuepress build docs"
   },
   "repository": {
     "type": "git",
@@ -23,8 +25,11 @@
   },
   "homepage": "https://github.com/MeloGuo/Sight-Vue#readme",
   "dependencies": {
-    "vue": "^2.5.17",
-    "vue-hot-reload-api": "^2.3.1"
+    "ajv": "6.5.5",
+    "vue": "^2.5.21",
+    "vue-hot-reload-api": "^2.3.1",
+    "vue-loader": "^15.4.2",
+    "vue-template-compiler": "^2.5.21"
   },
   "devDependencies": {
     "@vue/component-compiler-utils": "^2.3.0",
@@ -44,7 +49,7 @@
     "sinon": "^7.1.1",
     "sinon-chai": "^3.3.0",
     "standard": "^12.0.1",
-    "vue-template-compiler": "^2.5.17"
+    "vuepress": "^0.14.8"
   },
   "alias": {
     "vue": "./node_modules/vue/dist/vue.common.js"
