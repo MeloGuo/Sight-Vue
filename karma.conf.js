@@ -28,7 +28,16 @@ module.exports = function (config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['spec'],
+    reporters: ['spec', 'coverage'],
+
+    // test coverage
+    coverageReporter: {
+      dir: './coverage',
+      reporters: [
+        { type: 'lcov', subdir: '.' },
+        { type: 'text-summary' }
+      ]
+    },
 
     // web server port
     // port: 9876,
