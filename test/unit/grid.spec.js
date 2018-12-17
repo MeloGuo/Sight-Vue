@@ -6,6 +6,7 @@ import { expect } from 'chai'
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
+/* eslint-disable no-unused-expressions */
 describe('Grid', () => {
   describe('Row', () => {
     it('should exist', function () {
