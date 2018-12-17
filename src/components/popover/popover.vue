@@ -201,7 +201,7 @@
     &.position-right {
       transform: translateX(100%);
       margin-left: 10px;
-      filter: drop-shadow(-1px 0 1px rgb(0, 0, 0, 0.5));
+      filter: drop-shadow(-1px 0 1px rgba(0, 0, 0, 0.5));
 
       &::before, &::after {
         transform: translateY(-50%);
