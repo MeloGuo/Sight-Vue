@@ -1,18 +1,19 @@
 import chai, { expect } from 'chai'
 // import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import validate from '../../src/components/validate/validate.js'
+import Validator from '../../src/components/validate/validate.js'
 
 chai.use(sinonChai)
 
 /* eslint-disable no-unused-expressions */
-describe('validate', () => {
+describe('Validator', () => {
   it('should exist', function () {
-    expect(validate).to.be.exist
+    expect(Validator).to.be.exist
   })
 
   it('required true Pass', function () {
-    const errors = validate({ email: '' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: '' }, [
       { key: 'email', required: true }
     ])
 
@@ -20,7 +21,8 @@ describe('validate', () => {
   })
 
   it('require true Error', function () {
-    const errors = validate({ email: 0 }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: 0 }, [
       { key: 'email', required: true }
     ])
 
@@ -28,7 +30,8 @@ describe('validate', () => {
   })
 
   it('pattern Pass', function () {
-    const errors = validate({ email: 'guo@gmail.com' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: 'guo@gmail.com' }, [
       { key: 'email', pattern: /^.+@.+$/ }
     ])
 
@@ -36,7 +39,8 @@ describe('validate', () => {
   })
 
   it('pattern Error', function () {
-    const errors = validate({ email: '@gmail.com' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: '@gmail.com' }, [
       { key: 'email', pattern: /^.+@.+$/ }
     ])
 
@@ -44,7 +48,8 @@ describe('validate', () => {
   })
 
   it('pattern email Pass', function () {
-    const errors = validate({ email: 'guo@gmail.com' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: 'guo@gmail.com' }, [
       { key: 'email', pattern: 'email' }
     ])
 
@@ -52,7 +57,8 @@ describe('validate', () => {
   })
 
   it('pattern email Error', function () {
-    const errors = validate({ email: '@gmail.com' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: '@gmail.com' }, [
       { key: 'email', pattern: 'email' }
     ])
 
@@ -60,7 +66,8 @@ describe('validate', () => {
   })
 
   it('require && pattern Pass', function () {
-    const errors = validate({ email: '' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: '' }, [
       { key: 'email', pattern: 'email', required: true }
     ])
 
@@ -69,7 +76,8 @@ describe('validate', () => {
   })
 
   it('pattern && minLength', function () {
-    const errors = validate({ email: 'wr' }, [
+    const validator = new Validator()
+    const errors = validator.validate({ email: 'wr' }, [
       { key: 'email', pattern: 'email', minLength: 6 }
     ])
 
@@ -80,23 +88,24 @@ describe('validate', () => {
   })
 
   it('invalid validator', function () {
-    const fn = () => {
-      validate({}, [
+    const validator = new Validator()
+
+    expect(() => {
+      validator.validate({}, [
         { key: '', hasNumber: true }
       ])
-    }
-
-    expect(fn).to.throw(Error, 'Invalid validator of \'hasNumber\'')
+    }).to.throw(Error, 'Invalid validator of \'hasNumber\'')
   })
 
   it('custom validator Pass', function () {
-    validate.hasNumber = (value) => {
+    const validator = new Validator()
+    validator.hasNumber = (value) => {
       if (!/\d/.test(value)) {
         return '必须含有数字'
       }
     }
 
-    const errors = validate({ content: 'don\'t have number' }, [
+    const errors = validator.validate({ content: 'don\'t have number' }, [
       { key: 'content', hasNumber: true }
     ])
 
@@ -104,16 +113,58 @@ describe('validate', () => {
   })
 
   it('custom validator Error', function () {
-    validate.hasNumber = (value) => {
+    const validator = new Validator()
+    validator.hasNumber = (value) => {
       if (!/\d/.test(value)) {
         return '必须含有数字'
       }
     }
 
-    const errors = validate({ content: 'have number 123' }, [
+    const errors = validator.validate({ content: 'have number 123' }, [
       { key: 'content', hasNumber: true }
     ])
 
     expect(errors).to.not.have.property('content')
+  })
+
+  it('custom validator don\'t affect each other', function () {
+    const validator1 = new Validator()
+    const validator2 = new Validator()
+
+    const data = { email: 'just a string' }
+    const rules = [{ key: 'email', hasNumber: true }]
+
+    validator1.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+
+    expect(() => {
+      validator1.validate(data, rules)
+    }).to.not.throw()
+    expect(() => {
+      validator2.validate(data, rules)
+    }).to.throw()
+  })
+
+  it('add origin validator', function () {
+    Validator.add('hasNumber', function (value) {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    })
+
+    const validator1 = new Validator()
+    const validator2 = new Validator()
+    const data = { email: 'just a string' }
+    const rules = [{ key: 'email', hasNumber: true }]
+
+    expect(() => {
+      validator1.validate(data, rules)
+    }).to.not.throw()
+    expect(() => {
+      validator2.validate(data, rules)
+    }).to.not.throw()
   })
 })
