@@ -78,4 +78,42 @@ describe('validate', () => {
       pattern: '格式不正确'
     })
   })
+
+  it('invalid validator', function () {
+    const fn = () => {
+      validate({}, [
+        { key: '', hasNumber: true }
+      ])
+    }
+
+    expect(fn).to.throw(Error, 'Invalid validator of \'hasNumber\'')
+  })
+
+  it('custom validator Pass', function () {
+    validate.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+
+    const errors = validate({ content: 'don\'t have number' }, [
+      { key: 'content', hasNumber: true }
+    ])
+
+    expect(errors).to.have.nested.property('content.hasNumber', '必须含有数字')
+  })
+
+  it('custom validator Error', function () {
+    validate.hasNumber = (value) => {
+      if (!/\d/.test(value)) {
+        return '必须含有数字'
+      }
+    }
+
+    const errors = validate({ content: 'have number 123' }, [
+      { key: 'content', hasNumber: true }
+    ])
+
+    expect(errors).to.not.have.property('content')
+  })
 })
