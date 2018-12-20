@@ -6,7 +6,7 @@ export default class Validator {
   }
 
   static add (name, fn) {
-    this[name] = fn
+    Validator.prototype[name] = fn
   }
 
   validate (data, rules) {
