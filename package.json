@@ -1,5 +1,5 @@
 {
-  "name": "sight-vue-1-1",
+  "name": "sight-vue",
   "version": "0.0.1",
   "description": "这是一个Vue的UI库",
   "main": "dist/index.js",
