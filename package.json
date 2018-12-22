@@ -84,7 +84,7 @@
     ],
     "ignore": [
       "dist/",
-      "src/svg.js"
+      "/**/svg.js"
     ]
   },
   "husky": {
