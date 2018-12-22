@@ -5,102 +5,102 @@
 </template>
 
 <script>
-  /**
+/**
    * 判断传入响应式属性key的值
    * @param value
    * @returns {boolean}
    */
-  const validator = function (value) {
-    let keys = Object.keys(value)
-    return keys.every((key) => ['span', 'offset'].indexOf(key) > -1)
-  }
+const validator = function (value) {
+  let keys = Object.keys(value)
+  return keys.every((key) => ['span', 'offset'].indexOf(key) > -1)
+}
 
-  export default {
-    name: 'SightCol',
-    props: {
-      span: {
-        type: [Number, String],
-        validator (value) {
-          value = parseInt(value)
-          return value > 0 && value <= 24
-        }
-      },
-      offset: {
-        type: [Number, String],
-        validator (value) {
-          value = parseInt(value)
-          return value > 0 && value <= 24
-        }
-      },
-      xs: {
-        type: Object,
-        validator
-      },
-      sm: {
-        type: Object,
-        validator
-      },
-      md: {
-        type: Object,
-        validator
-      },
-      lg: {
-        type: Object,
-        validator
-      },
-      xl: {
-        type: Object,
-        validator
-      },
-      xxl: {
-        type: Object,
-        validator
+export default {
+  name: 'SightCol',
+  props: {
+    span: {
+      type: [Number, String],
+      validator (value) {
+        value = parseInt(value)
+        return value > 0 && value <= 24
       }
     },
-    data () {
+    offset: {
+      type: [Number, String],
+      validator (value) {
+        value = parseInt(value)
+        return value > 0 && value <= 24
+      }
+    },
+    xs: {
+      type: Object,
+      validator
+    },
+    sm: {
+      type: Object,
+      validator
+    },
+    md: {
+      type: Object,
+      validator
+    },
+    lg: {
+      type: Object,
+      validator
+    },
+    xl: {
+      type: Object,
+      validator
+    },
+    xxl: {
+      type: Object,
+      validator
+    }
+  },
+  data () {
+    return {
+      gutter: 0 // 从父组件 Row 接收 gutter 值
+    }
+  },
+  methods: {
+    createClasses (obj, str = '') {
+      if (!obj) {
+        return []
+      }
+
+      const result = []
+      if (obj.span) {
+        result.push(`col-${str}${obj.span}`)
+      }
+      if (obj.offset) {
+        result.push(`offset-${str}${obj.offset}`)
+      }
+      return result
+    }
+  },
+  computed: {
+    colClasses () {
+      const { span, offset, xs, sm, md, lg, xl, xxl } = this
+      const createClasses = this.createClasses
+      return [
+        ...createClasses({ span, offset }),
+        ...createClasses(xs, 'xs-'),
+        ...createClasses(sm, 'sm-'),
+        ...createClasses(md, 'md-'),
+        ...createClasses(lg, 'lg-'),
+        ...createClasses(xl, 'xl-'),
+        ...createClasses(xxl, 'xxl-')
+      ]
+    },
+    gutterStyle () {
+      const padding = this.gutter / 2 + 'px'
       return {
-        gutter: 0 // 从父组件 Row 接收 gutter 值
-      }
-    },
-    methods: {
-      createClasses (obj, str = '') {
-        if (!obj) {
-          return []
-        }
-
-        const result = []
-        if (obj.span) {
-          result.push(`col-${str}${obj.span}`)
-        }
-        if (obj.offset) {
-          result.push(`offset-${str}${obj.offset}`)
-        }
-        return result
-      }
-    },
-    computed: {
-      colClasses () {
-        const {span, offset, xs, sm, md, lg, xl, xxl} = this
-        const createClasses = this.createClasses
-        return [
-          ...createClasses({span, offset}),
-          ...createClasses(xs, 'xs-'),
-          ...createClasses(sm, 'sm-'),
-          ...createClasses(md, 'md-'),
-          ...createClasses(lg, 'lg-'),
-          ...createClasses(xl, 'xl-'),
-          ...createClasses(xxl, 'xxl-')
-        ]
-      },
-      gutterStyle () {
-        const padding = this.gutter / 2 + 'px'
-        return {
-          paddingLeft: padding,
-          paddingRight: padding
-        }
+        paddingLeft: padding,
+        paddingRight: padding
       }
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
@@ -142,7 +142,6 @@
     }
     /* xs span */
     /////////////
-
 
     @media (min-width: 576px) {
       $prefix: col-sm-;

@@ -5,59 +5,59 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightRow',
-    props: {
-      gutter: {
-        type: [Number, String]
-      },
-      justify: {
-        type: String,
-        default: 'start',
-        validator (value) {
-          return [
-            'start',
-            'end',
-            'center',
-            'space-around',
-            'space-between'
-          ].indexOf(value) > -1
-        }
-      },
-      align: {
-        type: String,
-        default: 'top',
-        validator (value) {
-          return [
-            'top',
-            'middle',
-            'bottom'
-          ].indexOf(value) > -1
-        }
+export default {
+  name: 'SightRow',
+  props: {
+    gutter: {
+      type: [Number, String]
+    },
+    justify: {
+      type: String,
+      default: 'start',
+      validator (value) {
+        return [
+          'start',
+          'end',
+          'center',
+          'space-around',
+          'space-between'
+        ].indexOf(value) > -1
       }
     },
-    mounted () {
-      this.$children.forEach((child) => {
-        child.gutter = this.gutter
-      })
-    },
-    computed: {
-      gutterStyle () {
-        const margin = -this.gutter / 2 + 'px'
-        return {
-          marginLeft: margin,
-          marginRight: margin
-        }
-      },
-      rowClasses () {
-        const { justify, align } = this
+    align: {
+      type: String,
+      default: 'top',
+      validator (value) {
         return [
-          `row-${justify}`,
-          `row-${align}`
-        ]
+          'top',
+          'middle',
+          'bottom'
+        ].indexOf(value) > -1
       }
     }
+  },
+  mounted () {
+    this.$children.forEach((child) => {
+      child.gutter = this.gutter
+    })
+  },
+  computed: {
+    gutterStyle () {
+      const margin = -this.gutter / 2 + 'px'
+      return {
+        marginLeft: margin,
+        marginRight: margin
+      }
+    },
+    rowClasses () {
+      const { justify, align } = this
+      return [
+        `row-${justify}`,
+        `row-${align}`
+      ]
+    }
   }
+}
 </script>
 
 <style scoped lang="scss">

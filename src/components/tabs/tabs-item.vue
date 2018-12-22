@@ -5,49 +5,49 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightTabsItem',
-    inject: ['eventBus'],
-    props: {
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      name: {
-        type: String | Number,
-        required: true
-      }
+export default {
+  name: 'SightTabsItem',
+  inject: ['eventBus'],
+  props: {
+    disabled: {
+      type: Boolean,
+      default: false
     },
-    data () {
+    name: {
+      type: String | Number,
+      required: true
+    }
+  },
+  data () {
+    return {
+      active: false
+    }
+  },
+  computed: {
+    classes () {
       return {
-        active: false
-      }
-    },
-    computed: {
-      classes () {
-        return {
-          active: this.active,
-          disabled: this.disabled
-        }
-      }
-    },
-    created () {
-      if (this.eventBus) {
-        this.eventBus.$on('update:selected', (name) => {
-          this.active = name === this.name
-        })
-      }
-    },
-    methods: {
-      onClick () {
-        if (this.disabled) {
-          return
-        }
-        this.eventBus.$emit('update:selected', this.name, this)
-        this.$emit('click', this)
+        active: this.active,
+        disabled: this.disabled
       }
     }
+  },
+  created () {
+    if (this.eventBus) {
+      this.eventBus.$on('update:selected', (name) => {
+        this.active = name === this.name
+      })
+    }
+  },
+  methods: {
+    onClick () {
+      if (this.disabled) {
+        return
+      }
+      this.eventBus.$emit('update:selected', this.name, this)
+      this.$emit('click', this)
+    }
   }
+}
 </script>
 
 <style scoped lang="scss">

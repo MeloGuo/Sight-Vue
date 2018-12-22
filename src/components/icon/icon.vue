@@ -5,14 +5,14 @@
 </template>
 
 <script>
-  import './svg.js'
+import './svg.js'
 
-  export default {
-    name: 'SightIcon',
-    props: {
-      name: String
-    }
+export default {
+  name: 'SightIcon',
+  props: {
+    name: String
   }
+}
 </script>
 
 <style lang="scss" scoped>

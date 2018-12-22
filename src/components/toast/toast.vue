@@ -18,77 +18,77 @@
 </template>
 
 <script>
-  // 构造组件的选项
-  export default {
-    name: 'SightToast',
-    props: {
-      autoClose: {
-        type: Boolean,
-        default: true
-      },
-      autoCloseDelay: {
-        type: Number,
-        default: 1500
-      },
-      closeButton: {
-        type: Object,
-        default () {
-          return {
-            text: '关闭',
-            callback: undefined
-          }
-        }
-      },
-      enableHtml: {
-        type: Boolean,
-        default: false
-      },
-      position: {
-        type: String,
-        default: 'top',
-        validator (value) {
-          return ['top', 'bottom', 'middle'].indexOf(value) > -1
-        }
-      }
+// 构造组件的选项
+export default {
+  name: 'SightToast',
+  props: {
+    autoClose: {
+      type: Boolean,
+      default: true
     },
-    mounted () {
-      this.updateStyles()
-      this.execAutoClose()
+    autoCloseDelay: {
+      type: Number,
+      default: 1500
     },
-    computed: {
-      toastClasses () {
+    closeButton: {
+      type: Object,
+      default () {
         return {
-          [`position-${this.position}`]: true
+          text: '关闭',
+          callback: undefined
         }
       }
     },
-    methods: {
-      execAutoClose () {
-        if (this.autoClose) {
-          setTimeout(() => {
-            this.close()
-          }, this.autoCloseDelay)
-        }
-      },
-      updateStyles () {
-        this.$nextTick(() => {
-          this.$refs.line.style.height =
+    enableHtml: {
+      type: Boolean,
+      default: false
+    },
+    position: {
+      type: String,
+      default: 'top',
+      validator (value) {
+        return ['top', 'bottom', 'middle'].indexOf(value) > -1
+      }
+    }
+  },
+  mounted () {
+    this.updateStyles()
+    this.execAutoClose()
+  },
+  computed: {
+    toastClasses () {
+      return {
+        [`position-${this.position}`]: true
+      }
+    }
+  },
+  methods: {
+    execAutoClose () {
+      if (this.autoClose) {
+        setTimeout(() => {
+          this.close()
+        }, this.autoCloseDelay)
+      }
+    },
+    updateStyles () {
+      this.$nextTick(() => {
+        this.$refs.line.style.height =
             `${this.$refs.toast.getBoundingClientRect().height}px`
-        })
-      },
-      close () {
-        this.$el.remove()
-        this.$emit('close') // 清空外部 currentToast
-        this.$destroy()
-      },
-      onClickClose () {
-        this.close()
-        if (this.closeButton && typeof this.closeButton.callback === 'function') {
-          this.closeButton.callback(this)
-        }
+      })
+    },
+    close () {
+      this.$el.remove()
+      this.$emit('close') // 清空外部 currentToast
+      this.$destroy()
+    },
+    onClickClose () {
+      this.close()
+      if (this.closeButton && typeof this.closeButton.callback === 'function') {
+        this.closeButton.callback(this)
       }
     }
   }
+}
 </script>
 
 <style scoped lang="scss">

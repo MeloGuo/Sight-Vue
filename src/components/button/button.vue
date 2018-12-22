@@ -9,28 +9,28 @@
 </template>
 
 <script>
-  import Icon from '../icon/icon.vue'
+import Icon from '../icon/icon.vue'
 
-  export default {
-    name: 'SightButton',
-    components: {
-      's-icon': Icon
+export default {
+  name: 'SightButton',
+  components: {
+    's-icon': Icon
+  },
+  props: {
+    icon: String,
+    loading: {
+      type: Boolean,
+      default: false
     },
-    props: {
-      icon: String,
-      loading: {
-        type: Boolean,
-        default: false
-      },
-      iconPosition: {
-        type: String,
-        default: 'left',
-        validator (direction) {
-          return ['left', 'right'].indexOf(direction) > -1
-        }
+    iconPosition: {
+      type: String,
+      default: 'left',
+      validator (direction) {
+        return ['left', 'right'].indexOf(direction) > -1
       }
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

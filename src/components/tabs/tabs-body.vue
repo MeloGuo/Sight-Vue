@@ -5,13 +5,13 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightTabsBody',
-    inject: ['eventBus'],
-    created () {
+export default {
+  name: 'SightTabsBody',
+  inject: ['eventBus'],
+  created () {
 
-    }
   }
+}
 </script>
 
 <style scoped>

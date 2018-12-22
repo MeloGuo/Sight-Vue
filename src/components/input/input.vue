@@ -14,33 +14,33 @@
 </template>
 
 <script>
-  import Icon from '../icon/icon.vue'
+import Icon from '../icon/icon.vue'
 
-  export default {
-    components: {Icon},
-    name: 'SightInput',
-    props: {
-      value: {
-        type: String
-      },
-      disabled: {
-        type: Boolean,
-        default: false
-      },
-      readonly: {
-        type: Boolean,
-        default: false
-      },
-      error: {
-        type: String
-      }
+export default {
+  components: { Icon },
+  name: 'SightInput',
+  props: {
+    value: {
+      type: String
     },
-    methods: {
-      lol (...args) {
-        console.log(args)
-      }
+    disabled: {
+      type: Boolean,
+      default: false
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    error: {
+      type: String
+    }
+  },
+  methods: {
+    lol (...args) {
+      console.log(args)
     }
   }
+}
 </script>
 
 <style lang="scss" scoped>

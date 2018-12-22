@@ -5,33 +5,33 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightTabsPane',
-    inject: ['eventBus'],
-    props: {
-      name: {
-        type: String | Number,
-        required: true
-      }
-    },
-    data () {
-      return {
-        active: false
-      }
-    },
-    computed: {
-      classes () {
-        return {
-          active: this.active
-        }
-      }
-    },
-    created () {
-      this.eventBus.$on('update:selected', (name) => {
-        this.active = name === this.name
-      })
+export default {
+  name: 'SightTabsPane',
+  inject: ['eventBus'],
+  props: {
+    name: {
+      type: String | Number,
+      required: true
     }
+  },
+  data () {
+    return {
+      active: false
+    }
+  },
+  computed: {
+    classes () {
+      return {
+        active: this.active
+      }
+    }
+  },
+  created () {
+    this.eventBus.$on('update:selected', (name) => {
+      this.active = name === this.name
+    })
   }
+}
 </script>
 
 <style scoped lang="scss">

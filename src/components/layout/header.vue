@@ -5,9 +5,9 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightHeader'
-  }
+export default {
+  name: 'SightHeader'
+}
 </script>
 
 <style lang="scss" scoped>

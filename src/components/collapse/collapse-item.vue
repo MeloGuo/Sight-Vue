@@ -10,38 +10,38 @@
 </template>
 
 <script>
-  export default {
-    name: 'SightCollapseItem',
-    inject: ['eventBus'],
-    props: {
-      title: {
-        type: String,
-        required: true
-      },
-      name: {
-        type: String
-      }
+export default {
+  name: 'SightCollapseItem',
+  inject: ['eventBus'],
+  props: {
+    title: {
+      type: String,
+      required: true
     },
-    data () {
-      return {
-        isOpen: false
-      }
-    },
-    mounted () {
-      this.eventBus.$on('update:selected', (names) => {
-        this.isOpen = names.indexOf(this.name) > -1
-      })
-    },
-    methods: {
-      onClick () {
-        if (this.isOpen) {
-          this.eventBus.$emit('update:removeSelected', this.name)
-        } else {
-          this.eventBus.$emit('update:addSelected', this.name)
-        }
+    name: {
+      type: String
+    }
+  },
+  data () {
+    return {
+      isOpen: false
+    }
+  },
+  mounted () {
+    this.eventBus.$on('update:selected', (names) => {
+      this.isOpen = names.indexOf(this.name) > -1
+    })
+  },
+  methods: {
+    onClick () {
+      if (this.isOpen) {
+        this.eventBus.$emit('update:removeSelected', this.name)
+      } else {
+        this.eventBus.$emit('update:addSelected', this.name)
       }
     }
   }
+}
 </script>
 
 <style scoped lang="scss">
