@@ -6,13 +6,13 @@
 </template>
 
 <script>
-  import Button from './components/button/button.vue'
+import Button from './components/button/button.vue'
 
-  export default {
-    name: 'app',
-    components: { 's-button': Button },
+export default {
+  name: 'app',
+  components: { 's-button': Button }
 
-  }
+}
 </script>
 
 <style lang="scss" scoped>
