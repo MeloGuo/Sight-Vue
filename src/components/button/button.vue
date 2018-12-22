@@ -53,23 +53,23 @@
   }
 
   .s-button {
-    font-size: var($font-size);
-    height: var($button-height);
+    font-size: $font-size;
+    height: $button-height;
     padding: 0 1em;
-    border-radius: var($border-radius);
-    border: 1px solid var($border-color);
-    background: var($button-bg);
+    border-radius: $border-radius;
+    border: 1px solid $border-color;
+    background: $button-bg;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     vertical-align: middle;
 
     &:hover {
-      border-color: var($border-color-hover);
+      border-color: $border-color-hover;
     }
 
     &:active {
-      background-color: var($button-active-bg);
+      background-color: $button-active-bg;
     }
 
     &:focus {
