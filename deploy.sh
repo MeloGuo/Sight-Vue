@@ -20,9 +20,9 @@ git config --local user.name "MeloGuo"
 git config --local user.email "guoziliang199606@gmail.com"
 
 # 如果发布到
-# git push -f git@github.com:MeloGuo/Sight-Vue.git master:gh-pages
+git push -f git@github.com:MeloGuo/Sight-Vue.git master:gh-pages
 
 # 如果使用 travis 持续集成
-git push -f https://${access_token}@github.com/MeloGuo/Sight-Vue.git master:gh-pages
+#git push -f https://${access_token}@github.com/MeloGuo/Sight-Vue.git master:gh-pages
 
 cd -
