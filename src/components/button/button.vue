@@ -121,5 +121,9 @@ export default {
     .loading {
       animation: spin 1s infinite linear;
     }
+
+    .content {
+      padding: 0;
+    }
   }
 </style>
