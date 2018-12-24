@@ -6,6 +6,7 @@
 dist/
 .cache/
 coverage/
+src/components/exercise/
 
 ### macOS ###
 # General
