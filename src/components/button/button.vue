@@ -1,5 +1,5 @@
 <template>
-  <button class="s-button" :class="`icon-${iconPosition}`" @click="$emit('click')">
+  <button class="s-button" :class="classes" @click="emitClick" :disabled="disabled">
     <s-icon class="icon" v-if="icon && !loading" :name="icon"></s-icon>
     <s-icon class="icon loading" v-if="loading" name="loading"></s-icon>
     <div class="content">
@@ -27,6 +27,22 @@ export default {
       default: 'left',
       validator (direction) {
         return ['left', 'right'].indexOf(direction) > -1
+      }
+    },
+    disabled: {
+      type: Boolean,
+      default: false
+    }
+  },
+  computed: {
+    classes () {
+      return [`icon-${this.iconPosition}`, { 'disabled': this.disabled }]
+    }
+  },
+  methods: {
+    emitClick () {
+      if (!this.loading && !this.disabled) {
+        this.$emit('click')
       }
     }
   }
@@ -96,6 +112,10 @@ export default {
       > .content {
         order: 1;
       }
+    }
+
+    &.disabled {
+      background-color: #999999;
     }
 
     .loading {
