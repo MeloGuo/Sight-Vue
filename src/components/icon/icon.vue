@@ -1,6 +1,6 @@
 <template>
   <svg class="s-icon">
-    <use :xlink:href=`#i-${name}`></use>
+    <use :xlink:href="iconName"></use>
   </svg>
 </template>
 
@@ -11,6 +11,11 @@ export default {
   name: 'SightIcon',
   props: {
     name: String
+  },
+  computed: {
+    iconName () {
+      return `#i-${this.name}`
+    }
   }
 }
 </script>
