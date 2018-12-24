@@ -1,7 +1,7 @@
 import chai, { expect } from 'chai'
 import sinon from 'sinon'
 import sinonChai from 'sinon-chai'
-import { shallowMount, mount } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
 import Vue from 'vue'
 import Icon from '../../src/components/icon/icon.vue'
 import Button from '../../src/components/button/button.vue'
@@ -12,7 +12,7 @@ chai.use(sinonChai)
 Vue.config.productionTip = false
 Vue.config.devtools = false
 
-/* eslint-disable no-unused-expressions no-undef */
+/* eslint-disable no-unused-expressions */
 describe('Button', () => {
   it('存在', function () {
     [Icon, Button, ButtonGroup].forEach((component) => {
@@ -42,7 +42,7 @@ describe('Button', () => {
     })
     const vm = wrapper.vm
     const icon = vm.$el.querySelector('svg')
-    expect(getComputedStyle(icon).order).to.eq('2')
+    expect(window.getComputedStyle(icon).order).to.eq('2')
   })
 
   it('点击 button 触发 click 事件', function () {
