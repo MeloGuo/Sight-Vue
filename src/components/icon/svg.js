@@ -1,3 +1,4 @@
+/* istanbul ignore next */
 !(function (s) {
   var t
 
