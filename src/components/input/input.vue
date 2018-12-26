@@ -34,11 +34,6 @@ export default {
     error: {
       type: String
     }
-  },
-  methods: {
-    lol (...args) {
-      console.log(args)
-    }
   }
 }
 </script>
