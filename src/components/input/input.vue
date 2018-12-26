@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper" :class="{ error }">
-    <input type="text" :placeholder="placeholder" :value="value"
-           :disabled="disabled" :readonly="readonly"
+    <input :type="type" :placeholder="placeholder" :value="value"
+           :disabled="disabled" :readonly="readonly" :class="{ error }"
            @input="$emit('input', $event.target.value)"
            @change="$emit('change', $event.target.value)"
            @blur="$emit('blur', $event.target.value)"
@@ -37,6 +37,10 @@ export default {
     },
     placeholder: {
       type: String
+    },
+    type: {
+      type: String,
+      default: 'text'
     }
   }
 }
@@ -72,6 +76,9 @@ export default {
         border-color: #bbb;
         color: #aaa;
         cursor: not-allowed;
+      }
+      &.error {
+        color: red;
       }
     }
     &.error {
