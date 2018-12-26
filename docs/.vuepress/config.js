@@ -18,7 +18,8 @@ module.exports = {
         title: '组件',
         collapsable: false,
         children: [
-          ['/components/button', '按钮']
+          ['/components/button', '按钮'],
+          ['/components/input', '输入框']
         ]
       }
     ]
