@@ -8,7 +8,7 @@
     "build": "vue-cli-service build --target lib --name sight src/index.js",
     "lint": "vue-cli-service lint",
     "test": "standard --env mocha && cross-env BABEL_ENV=test karma start --single-run",
-    "dev-test": "karma start",
+    "dev-test": "cross-env BABEL_ENV=test karma start",
     "docs-dev": "vuepress dev docs",
     "docs-build": "vuepress build docs"
   },
