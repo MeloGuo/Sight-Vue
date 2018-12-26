@@ -87,6 +87,15 @@ describe('Validator', () => {
     })
   })
 
+  it('最小值', function () {
+    const validator = new Validator()
+    const errors = validator.validate({ email: 'guoziliang@gmail.com' }, [
+      { key: 'email', pattern: 'email', minLength: 6 }
+    ])
+
+    expect(errors).to.not.have.nested.property('email.minLength')
+  })
+
   it('invalid validator', function () {
     const validator = new Validator()
 
