@@ -31,13 +31,7 @@ export default {
       default: 1500
     },
     closeButton: {
-      type: Object,
-      default () {
-        return {
-          text: '关闭',
-          callback: undefined
-        }
-      }
+      type: Object
     },
     enableHtml: {
       type: Boolean,
@@ -71,6 +65,7 @@ export default {
       }
     },
     updateStyles () {
+      if (!this.closeButton) { return }
       this.$nextTick(() => {
         this.$refs.line.style.height =
             `${this.$refs.toast.getBoundingClientRect().height}px`
