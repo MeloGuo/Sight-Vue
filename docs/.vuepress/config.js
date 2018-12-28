@@ -19,7 +19,8 @@ module.exports = {
         collapsable: false,
         children: [
           ['/components/button', '按钮'],
-          ['/components/input', '输入框']
+          ['/components/input', '输入框'],
+          ['/components/toast', 'Toast']
         ]
       }
     ]
