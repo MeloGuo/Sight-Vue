@@ -27,7 +27,8 @@ export default {
   },
   provide () {
     return {
-      eventBus: this.eventBus
+      eventBus: this.eventBus,
+      root: this
     }
   },
   computed: {
@@ -55,6 +56,9 @@ export default {
 
         this.$emit('update:selected', this.mutableSelected)
       })
+    },
+    addItem (name) {
+      console.log(name)
     }
   },
   created () {

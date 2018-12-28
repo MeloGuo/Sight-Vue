@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'SightNavItem',
-  inject: ['eventBus'],
+  inject: ['eventBus', 'root'],
   props: {
     name: {
       type: String,
@@ -30,6 +30,8 @@ export default {
     }
   },
   created () {
+    this.root.addItem(this.name)
+
     this.eventBus.$on('update', (selected) => {
       if (selected.indexOf(this.name) > -1) {
         this.isSelected = true
