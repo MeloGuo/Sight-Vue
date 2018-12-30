@@ -27,8 +27,7 @@ export default {
   },
   provide () {
     return {
-      eventBus: this.eventBus,
-      root: this
+      eventBus: this.eventBus
     }
   },
   computed: {
@@ -41,7 +40,7 @@ export default {
       this.eventBus.$emit('update', this.selected)
     },
     listenToChildren () {
-      this.eventBus.$on('update:selected', (name) => {
+      this.eventBus.$on('add:selected', (name) => {
         if (this.multiple) {
           const index = this.mutableSelected.indexOf(name)
 
@@ -56,9 +55,6 @@ export default {
 
         this.$emit('update:selected', this.mutableSelected)
       })
-    },
-    addItem (name) {
-      console.log(name)
     }
   },
   created () {
@@ -74,8 +70,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import "var";
+
 .s-nav {
   display: flex;
-  border: 1px solid red;
+  border-bottom: 1px solid $grey;
 }
 </style>

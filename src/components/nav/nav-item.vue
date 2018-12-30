@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'SightNavItem',
-  inject: ['eventBus', 'root'],
+  inject: ['eventBus'],
   props: {
     name: {
       type: String,
@@ -26,29 +26,44 @@ export default {
   },
   methods: {
     onClickItem () {
-      this.eventBus.$emit('update:selected', this.name)
+      this.eventBus.$emit('add:selected', this.name)
+    },
+    emitUpdate () {
+      this.eventBus.$on('update', (selected) => {
+        this.isSelected = selected.indexOf(this.name) > -1
+      })
     }
   },
   created () {
-    this.root.addItem(this.name)
-
-    this.eventBus.$on('update', (selected) => {
-      if (selected.indexOf(this.name) > -1) {
-        this.isSelected = true
-      } else {
-        this.isSelected = false
-      }
-    })
+    this.emitUpdate()
   }
 }
 </script>
 
 <style scoped lang="scss">
+@import "var";
+
 .s-nav-item {
   padding: 10px 20px;
-
+  position: relative;
   &.active {
-    background-color: red;
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      border-bottom: 2px solid $blue;
+      width: 100%;
+    }
+  }
+}
+
+.s-sub-nav .s-nav-item {
+  &.active {
+    background-color: $grey;
+    &::after {
+      display: none;
+    }
   }
 }
 </style>
