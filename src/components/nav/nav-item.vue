@@ -21,7 +21,7 @@ export default {
   },
   computed: {
     classes () {
-      return [{ active: this.isSelected }]
+      return [{ active: this.isSelected }, { vertical: this.vertical }]
     }
   },
   methods: {
@@ -46,24 +46,39 @@ export default {
 .s-nav-item {
   padding: 10px 20px;
   position: relative;
-  &.active {
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      border-bottom: 2px solid $blue;
-      width: 100%;
+
+  &:not(.vertical) {
+    &.active {
+      color: $blue;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        border-bottom: 2px solid $blue;
+        width: 100%;
+      }
+    }
+  }
+
+  &.vertical {
+    &.active {
+      color: $blue;
+      background-color: $grey;
     }
   }
 }
 
 .s-sub-nav .s-nav-item {
-  &.active {
-    background-color: $grey;
-    &::after {
-      display: none;
+  &:not(.vertical) {
+    &.active {
+      color: $blue;
+      &::after {
+        content: none;
+      }
     }
+
+    color: #000;
   }
 }
 </style>

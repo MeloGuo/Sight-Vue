@@ -39,9 +39,7 @@ export default {
   },
   computed: {
     classes () {
-      return {
-        active: this.active
-      }
+      return [{ active: this.active }, { vertical: this.vertical }]
     }
   },
   methods: {
@@ -59,7 +57,7 @@ export default {
       }
     },
 
-    /* animation hooks */
+    /* vertical animation hooks */
     enter (el, done) {
       const { height } = getComputedStyle(el)
       el.style.height = 0
@@ -84,7 +82,7 @@ export default {
     afterLeave (el) {
       el.style.height = 'auto'
     },
-    /* animation hooks */
+    /* vertical animation hooks */
 
     getChildrenNames ($children) {
       return $children.reduce((result, childVm) => {
@@ -112,14 +110,17 @@ export default {
   position: relative;
   background-color: white;
 
-  &.active {
-    &::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      width: 100%;
-      border-bottom: 2px solid $blue;
+  &:not(.vertical) {
+    &.active {
+      color: $blue;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        border-bottom: 2px solid $blue;
+      }
     }
   }
 
@@ -144,22 +145,26 @@ export default {
       box-shadow: none;
       transition: height 300ms;
       overflow: hidden;
+      font-size: $small-font-size;
     }
+  }
+}
+
+.s-sub-nav .s-sub-nav {
+  &:not(.vertical) {
+    &.active {
+      color: $blue;
+      &::after {
+        content: none;
+      }
+    }
+
+    color: #000;
   }
 }
 
 .s-sub-nav .s-sub-nav .s-sub-nav-popover {
   top: 0;
   left: 100%;
-  margin-left: 8px;
-}
-
-.s-sub-nav .s-sub-nav {
-  &.active {
-    &::after {
-      display: none;
-    }
-    background-color: $grey;
-  }
 }
 </style>

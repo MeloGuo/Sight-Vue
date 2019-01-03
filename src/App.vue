@@ -24,6 +24,11 @@
           <template slot="title">联系方式</template>
           <s-nav-item name="wechat">微信</s-nav-item>
           <s-nav-item name="qq">QQ</s-nav-item>
+          <s-sub-nav name="wtf">
+            <template slot="title">不知道</template>
+            <s-nav-item name="lol">fsdfsdf</s-nav-item>
+            <s-nav-item name="fsdf">afsdfasdf</s-nav-item>
+          </s-sub-nav>
         </s-sub-nav>
       </s-sub-nav>
       <s-nav-item name="hire">招聘</s-nav-item>
