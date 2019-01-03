@@ -30,11 +30,6 @@ export default {
       vertical: this.vertical
     }
   },
-  computed: {
-    items () {
-      return this.$children.filter((vm) => vm.$options.name === 'SightNavItem')
-    }
-  },
   methods: {
     updateChildren () {
       this.eventBus.$emit('update', this.selected)

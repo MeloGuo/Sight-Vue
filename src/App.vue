@@ -24,10 +24,11 @@
           <template slot="title">联系方式</template>
           <s-nav-item name="wechat">微信</s-nav-item>
           <s-nav-item name="qq">QQ</s-nav-item>
-          <s-sub-nav name="wtf">
-            <template slot="title">不知道</template>
-            <s-nav-item name="lol">fsdfsdf</s-nav-item>
-            <s-nav-item name="fsdf">afsdfasdf</s-nav-item>
+          <s-sub-nav name="phone">
+            <template slot="title">手机</template>
+            <s-nav-item name="cm">移动</s-nav-item>
+            <s-nav-item name="cn">联通</s-nav-item>
+            <s-nav-item name="ct">电信</s-nav-item>
           </s-sub-nav>
         </s-sub-nav>
       </s-sub-nav>
