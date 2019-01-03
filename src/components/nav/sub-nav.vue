@@ -1,17 +1,20 @@
 <template>
   <div class="s-sub-nav" :class="classes" v-click-outside="close">
-    <span @click="toggle">
+    <span class="s-sub-nav-label" @click="onClickTitle">
       <slot name="title"></slot>
+      <span class="s-sub-nav-icon" :class="{ open, vertical }">
+        <s-icon name="right"></s-icon>
+      </span>
     </span>
     <template v-if="vertical">
       <transition name="slide" @enter="enter" @after-enter="afterEnter" @leave="leave" @after-leave="afterLeave">
-        <div v-show="isShow" class="s-sub-nav-popover" :class="{ vertical }">
+        <div v-show="open" class="s-sub-nav-popover" :class="{ vertical }">
           <slot></slot>
         </div>
       </transition>
     </template>
     <template v-else>
-      <div v-show="isShow" class="s-sub-nav-popover">
+      <div v-show="open" class="s-sub-nav-popover">
         <slot></slot>
       </div>
     </template>
@@ -20,9 +23,13 @@
 
 <script>
 import clickOutside, { removeListener } from '../click-outside'
+import Icon from '../icon/icon.vue'
 
 export default {
   name: 'SightSubNav',
+  components: {
+    's-icon': Icon
+  },
   inject: ['eventBus', 'vertical'],
   directives: { clickOutside },
   props: {
@@ -33,7 +40,7 @@ export default {
   },
   data () {
     return {
-      isShow: false,
+      open: false,
       active: false
     }
   },
@@ -43,18 +50,11 @@ export default {
     }
   },
   methods: {
-    open () {
-      this.isShow = true
+    onClickTitle () {
+      this.open = !this.open
     },
     close () {
-      this.isShow = false
-    },
-    toggle () {
-      if (this.isShow) {
-        this.close()
-      } else {
-        this.open()
-      }
+      this.open = false
     },
 
     /* vertical animation hooks */
@@ -92,7 +92,7 @@ export default {
     }
   },
   created () {
-    this.eventBus.$on('add:selected', (name) => {
+    this.eventBus.$on('update:selected', (name) => {
       const childrenNames = this.getChildrenNames(this.$children)
       this.active = childrenNames.indexOf(name) > -1
     })
@@ -124,9 +124,13 @@ export default {
     }
   }
 
-  > span {
+  &-label {
     display: block;
     padding: 10px 20px;
+  }
+
+  &-icon {
+    display: none;
   }
 
   &-popover {
@@ -160,6 +164,31 @@ export default {
     }
 
     color: #000;
+  }
+
+  .s-sub-nav-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .s-sub-nav-icon {
+    display: inline-flex;
+    transition: transform 250ms;
+    svg {
+      fill: $light-color;
+    }
+
+    &.vertical {
+      transform: rotate(90deg);
+      &.open {
+        transform: rotate(270deg);
+      }
+    }
+
+    &.open {
+      transform: rotate(180deg);
+    }
   }
 }
 

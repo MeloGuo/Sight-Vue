@@ -40,7 +40,7 @@ export default {
       this.eventBus.$emit('update', this.selected)
     },
     listenToChildren () {
-      this.eventBus.$on('add:selected', (name) => {
+      this.eventBus.$on('update:selected', (name) => {
         this.$emit('update:selected', name)
       })
     }

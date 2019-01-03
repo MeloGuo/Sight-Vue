@@ -26,7 +26,7 @@ export default {
   },
   methods: {
     onClickItem () {
-      this.eventBus.$emit('add:selected', this.name)
+      this.eventBus.$emit('update:selected', this.name)
     },
     listenUpdate () {
       this.eventBus.$on('update', (selected) => {
