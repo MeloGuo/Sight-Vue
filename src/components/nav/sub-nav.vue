@@ -58,6 +58,8 @@ export default {
         this.open()
       }
     },
+
+    /* animation hooks */
     enter (el, done) {
       const { height } = getComputedStyle(el)
       el.style.height = 0
@@ -82,6 +84,8 @@ export default {
     afterLeave (el) {
       el.style.height = 'auto'
     },
+    /* animation hooks */
+
     getChildrenNames ($children) {
       return $children.reduce((result, childVm) => {
         childVm.$children.length === 0 ? result.push(childVm.$props.name) : result.push(...this.getChildrenNames(childVm.$children))

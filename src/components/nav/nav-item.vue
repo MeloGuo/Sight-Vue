@@ -28,14 +28,14 @@ export default {
     onClickItem () {
       this.eventBus.$emit('add:selected', this.name)
     },
-    emitUpdate () {
+    listenUpdate () {
       this.eventBus.$on('update', (selected) => {
-        this.isSelected = selected.indexOf(this.name) > -1
+        this.isSelected = selected === this.name
       })
     }
   },
   created () {
-    this.emitUpdate()
+    this.listenUpdate()
   }
 }
 </script>

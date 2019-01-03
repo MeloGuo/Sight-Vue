@@ -48,8 +48,8 @@ export default {
   },
   data () {
     return {
-      selected: ['home'],
-      selected2: ['hire']
+      selected: 'home',
+      selected2: 'hire'
     }
   }
 }

@@ -11,12 +11,8 @@ export default {
   name: 'SightNav',
   props: {
     selected: {
-      type: Array,
-      default: () => []
-    },
-    multiple: {
-      type: Boolean,
-      default: false
+      type: String,
+      required: true
     },
     vertical: {
       type: Boolean,
@@ -25,8 +21,7 @@ export default {
   },
   data () {
     return {
-      eventBus: new Vue(),
-      mutableSelected: this.selected
+      eventBus: new Vue()
     }
   },
   provide () {
@@ -46,19 +41,7 @@ export default {
     },
     listenToChildren () {
       this.eventBus.$on('add:selected', (name) => {
-        if (this.multiple) {
-          const index = this.mutableSelected.indexOf(name)
-
-          if (index < 0) {
-            this.mutableSelected.push(name)
-          } else {
-            this.mutableSelected.splice(index, 1)
-          }
-        } else {
-          this.mutableSelected = [name]
-        }
-
-        this.$emit('update:selected', this.mutableSelected)
+        this.$emit('update:selected', name)
       })
     }
   },
