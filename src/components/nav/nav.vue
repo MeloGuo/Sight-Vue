@@ -1,5 +1,5 @@
 <template>
-  <div class="s-nav">
+  <div class="s-nav" :class="{ vertical }">
     <slot></slot>
   </div>
 </template>
@@ -17,6 +17,10 @@ export default {
     multiple: {
       type: Boolean,
       default: false
+    },
+    vertical: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -27,7 +31,8 @@ export default {
   },
   provide () {
     return {
-      eventBus: this.eventBus
+      eventBus: this.eventBus,
+      vertical: this.vertical
     }
   },
   computed: {
@@ -75,5 +80,13 @@ export default {
 .s-nav {
   display: flex;
   border-bottom: 1px solid $grey;
+  color: $color;
+  cursor: default;
+  user-select: none;
+
+  &.vertical {
+    flex-direction: column;
+    border: 1px solid $grey;
+  }
 }
 </style>

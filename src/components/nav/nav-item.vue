@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'SightNavItem',
-  inject: ['eventBus'],
+  inject: ['eventBus', 'vertical'],
   props: {
     name: {
       type: String,
