@@ -1,27 +1,30 @@
 <template>
   <div class="cascader">
-    <div class="trigger">
+    <div class="trigger" @click="popoverVisible = !popoverVisible">
       <slot></slot>
     </div>
-    <div class="popover">
-      <div v-for="item in source">
-        <cascader-x :source-item="item"></cascader-x>
-      </div>
+    <div class="popover" v-if="popoverVisible">
+      <cascader-items :items="source"></cascader-items>
     </div>
   </div>
 </template>
 
 <script>
-  import CascaderItem from './cascader-item.vue'
+  import CascaderItems from './cascader-items.vue'
 
   export default {
     name: 'SightCascader',
     components: {
-      'cascader-x': CascaderItem
+      'cascader-items': CascaderItems
     },
     props: {
       source: {
         type: Array
+      }
+    },
+    data () {
+      return {
+        popoverVisible: false
       }
     }
   }
@@ -32,5 +35,17 @@
 
   .cascader {
 
+    .trigger {
+      border: 1px solid red;
+      height: 32px;
+      width: 100px;
+    }
+
+    .popover {
+      border: 1px solid red;
+      height: 200px;
+      width: 100px;
+      display: flex;
+    }
   }
 </style>
