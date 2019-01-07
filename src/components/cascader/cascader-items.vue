@@ -1,9 +1,5 @@
 <template>
   <div class="cascaderItems">
-    <div>
-      selected: {{selected && selected[level] && selected[level].name}}
-      level: {{level}}
-    </div>
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
@@ -54,6 +50,10 @@
         copy[this.level] = item
         copy.splice(this.level + 1) // 删除后面的值
         this.$emit('update:selected', copy)
+
+        if (!item.children) {
+          // 关闭弹窗
+        }
       },
       onUpdate (newSelected) {
         this.$emit('update:selected', newSelected)
