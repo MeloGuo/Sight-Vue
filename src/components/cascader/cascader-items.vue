@@ -1,13 +1,18 @@
 <template>
   <div class="cascaderItems">
+    <div>
+      selected: {{selected && selected[level] && selected[level].name}}
+      level: {{level}}
+    </div>
     <div class="left">
-      <div class="label" v-for="item in items" @click="leftSelected = item">
+      <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
-        <s-icon class="icon" name="right"></s-icon>
+        <s-icon v-if="item.children" class="icon" name="right"></s-icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
-      <sight-cascader-items :items="rightItems"></sight-cascader-items>
+      <sight-cascader-items :items="rightItems" :selected="selected"
+        :level="level + 1" @update:selected="onUpdate"></sight-cascader-items>
     </div>
   </div>
 </template>
@@ -23,20 +28,34 @@
     props: {
       items: {
         type: Array
-      }
-    },
-    data () {
-      return {
-        leftSelected: null
+      },
+      selected: {
+        type: Array,
+        default: () => []
+      },
+      level: {
+        type: Number,
+        default: 0
       }
     },
     computed: {
       rightItems () {
-        if (this.leftSelected && this.leftSelected.children) {
-          return this.leftSelected.children
+        const currentSelected = this.selected[this.level]
+        if (currentSelected && currentSelected.children) {
+          return currentSelected.children
         } else {
           return null
         }
+      }
+    },
+    methods: {
+      onClickLabel (item) {
+        const copy = JSON.parse(JSON.stringify(this.selected))
+        copy[this.level] = item
+        this.$emit('update:selected', copy)
+      },
+      onUpdate (newSelected) {
+        this.$emit('update:selected', newSelected)
       }
     }
   }

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-cascader popover-class-name="xxx" :source="dataSource"></s-cascader>
+    <s-cascader popover-class-name="xxx" :source="dataSource" :selected.sync="selected"></s-cascader>
   </div>
 </template>
 
@@ -50,7 +50,8 @@
             { name: '莆田' },
             { name: '三明' }
           ]
-        }]
+        }],
+        selected: []
       }
     }
   }
