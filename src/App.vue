@@ -1,69 +1,64 @@
 <template>
   <div>
-    <s-nav :selected.sync="selected" vertical style="width: 200px;">
-      <s-nav-item name="home">首页</s-nav-item>
-      <s-sub-nav name="about">
-        <template slot="title">关于</template>
-        <s-nav-item name="culture">企业文化</s-nav-item>
-        <s-nav-item name="team">开发团队</s-nav-item>
-        <s-sub-nav name="contact">
-          <template slot="title">联系方式</template>
-          <s-nav-item name="wechat">微信</s-nav-item>
-          <s-nav-item name="qq">QQ</s-nav-item>
-        </s-sub-nav>
-      </s-sub-nav>
-      <s-nav-item name="hire">招聘</s-nav-item>
-    </s-nav>
-    <s-nav :selected.sync="selected2">
-      <s-nav-item name="home">首页</s-nav-item>
-      <s-sub-nav name="about">
-        <template slot="title">关于</template>
-        <s-nav-item name="culture">企业文化</s-nav-item>
-        <s-nav-item name="team">开发团队</s-nav-item>
-        <s-sub-nav name="contact">
-          <template slot="title">联系方式</template>
-          <s-nav-item name="wechat">微信</s-nav-item>
-          <s-nav-item name="qq">QQ</s-nav-item>
-          <s-sub-nav name="phone">
-            <template slot="title">手机</template>
-            <s-nav-item name="cm">移动</s-nav-item>
-            <s-nav-item name="cn">联通</s-nav-item>
-            <s-nav-item name="ct">电信</s-nav-item>
-          </s-sub-nav>
-        </s-sub-nav>
-      </s-sub-nav>
-      <s-nav-item name="hire">招聘</s-nav-item>
-    </s-nav>
-    <div>
-      <p>这里有段话</p>
-    </div>
+    <s-cascader :source="dataSource"></s-cascader>
   </div>
 </template>
 
 <script>
-import Nav from './components/nav/nav.vue'
-import NavItem from './components/nav/nav-item.vue'
-import SubNav from './components/nav/sub-nav.vue'
+  import Cascader from './components/cascader/cascader.vue'
 
-export default {
-  name: 'app',
-  components: {
-    's-nav': Nav,
-    's-nav-item': NavItem,
-    's-sub-nav': SubNav
-  },
-  data () {
-    return {
-      selected: 'home',
-      selected2: 'hire'
+  export default {
+    name: 'app',
+    components: {
+      's-cascader': Cascader
+    },
+    data () {
+      return {
+        dataSource: [{
+          name: '浙江',
+          children: [
+            {
+              name: '杭州',
+              children: [
+                { name: '上城' },
+                { name: '下城' },
+                { name: '江干' }
+              ]
+            },
+            {
+              name: '嘉兴',
+              children: [
+                { name: '南湖' },
+                { name: '秀洲' },
+                { name: '嘉善' }
+              ]
+            },
+            { name: '湖州' }
+          ]
+        }, {
+          name: '福建',
+          children: [
+            {
+              name: '福州',
+              children: [
+                { name: '鼓楼' },
+                { name: '台江' },
+                { name: '仓山' }
+              ]
+            },
+            { name: '厦门' },
+            { name: '莆田' },
+            { name: '三明' }
+          ]
+        }]
+      }
     }
   }
-}
 </script>
 
 <style lang="scss" scoped>
-* {
-  margin: 0;
-  padding: 0;
-}
+  * {
+    margin: 0;
+    padding: 0;
+  }
 </style>
