@@ -4,7 +4,7 @@
       <slot></slot>
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items class="popover" :class="[popoverClassName]" :items="source" :selected="selected" @update:selected="onUpdate"></cascader-items>
+      <cascader-items class="popover" :class="[popoverClassName]" :items="source" :selected= "selected" @update:selected="onUpdate"></cascader-items>
     </div>
   </div>
 </template>

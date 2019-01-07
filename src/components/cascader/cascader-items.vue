@@ -52,6 +52,7 @@
       onClickLabel (item) {
         const copy = JSON.parse(JSON.stringify(this.selected))
         copy[this.level] = item
+        copy.splice(this.level + 1) // 删除后面的值
         this.$emit('update:selected', copy)
       },
       onUpdate (newSelected) {
