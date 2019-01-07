@@ -81,7 +81,8 @@
     ],
     "ignore": [
       "dist/",
-      "/**/svg.js"
+      "/**/svg.js",
+      "tests/fixtures/db.js"
     ]
   },
   "eslintIgnore": ["test/"],
