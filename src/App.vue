@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-cascader :source="dataSource"></s-cascader>
+    <s-cascader popover-class-name="xxx" :source="dataSource"></s-cascader>
   </div>
 </template>
 
@@ -60,5 +60,9 @@
   * {
     margin: 0;
     padding: 0;
+  }
+
+  .xxx {
+    height: 300px;
   }
 </style>
