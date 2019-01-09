@@ -36,11 +36,11 @@
     },
     computed: {
       rightItems () {
-        const currentSelected = this.selected[this.level]
-        if (currentSelected && currentSelected.children) {
-          return currentSelected.children
-        } else {
-          return null
+        if (this.selected[this.level]) {
+          const selected = this.items.filter(item => item.name === this.selected[this.level].name)
+          if (selected && selected[0].children && selected[0].children.length > 0) {
+            return selected[0].children
+          }
         }
       }
     },
@@ -75,6 +75,7 @@
     .left {
       height: 100%;
       padding: .3em 0;
+      overflow: scroll;
     }
     .right {
       border-left: 1px solid $border-color-light;

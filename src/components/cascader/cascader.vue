@@ -32,6 +32,9 @@
       level: {
         type: Number,
         default: 0
+      },
+      loadData: {
+        type: Function
       }
     },
     data () {
@@ -47,6 +50,51 @@
     methods: {
       onUpdate (newSelected) {
         this.$emit('update:selected', newSelected)
+
+        const lastItem = newSelected[newSelected.length - 1]
+
+        const simplest = (children, id) => {
+          return children.filter(child => child.id === id)[0]
+        }
+
+        const complex = (children, id) => {
+          const noChildren = []
+          const hasChildren = []
+          children.forEach((child) => {
+            if (child.children) {
+              hasChildren.push(child)
+            } else {
+              noChildren.push(child)
+            }
+          })
+
+          let found = simplest(noChildren, id)
+          if (found) {
+            return found
+          } else {
+            found = simplest(hasChildren, id)
+            if (found) {
+              return found
+            } else {
+              for (let i = 0; i < hasChildren.length; i++) {
+                found = complex(hasChildren[i].children, id)
+                if (found) {
+                  return found
+                }
+              }
+              return undefined
+            }
+          }
+        }
+
+        const updateSource = (result) => {
+          const copy = JSON.parse(JSON.stringify(this.source))
+          const toUpdate = complex(copy, lastItem.id)
+          toUpdate.children = result
+          this.$emit('update:source', copy)
+        }
+
+        this.loadData(lastItem, updateSource)
       }
     }
   }
