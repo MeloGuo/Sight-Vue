@@ -11,11 +11,52 @@
   function ajax (parentId = 0) {
     return new Promise((resolve) => {
       setTimeout(() => {
-        const result = db.filter((item) => item.parent_id === parentId)
+        const result = db.filter(item => item.parent_id === parentId).map(item => {
+          item.isLeaf = db.every(item2 => item2.parent_id !== item.id)
+          return item
+        })
         resolve(result)
       }, 0)
     })
   }
+
+  const data = [{
+    name: '浙江',
+    children: [
+      {
+        name: '杭州',
+        children: [
+          { name: '上城' },
+          { name: '下城' },
+          { name: '江干' }
+        ]
+      },
+      {
+        name: '嘉兴',
+        children: [
+          { name: '南湖' },
+          { name: '秀洲' },
+          { name: '嘉善' }
+        ]
+      },
+      { name: '湖州' }
+    ]
+  }, {
+    name: '福建',
+    children: [
+      {
+        name: '福州',
+        children: [
+          { name: '鼓楼' },
+          { name: '台江' },
+          { name: '仓山' }
+        ]
+      },
+      { name: '厦门' },
+      { name: '莆田' },
+      { name: '三明' }
+    ]
+  }]
 
   export default {
     name: 'app',

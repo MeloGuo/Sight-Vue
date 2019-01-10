@@ -3,12 +3,12 @@
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
         {{item.name}}
-        <s-icon v-if="item.children" class="icon" name="right"></s-icon>
+        <s-icon v-if="iconVisible(item)" class="icon" name="right"></s-icon>
       </div>
     </div>
     <div class="right" v-if="rightItems">
       <sight-cascader-items :items="rightItems" :selected="selected"
-        :level="level + 1" @update:selected="onUpdate"></sight-cascader-items>
+        :level="level + 1" @update:selected="onUpdate" :load-data="loadData"></sight-cascader-items>
     </div>
   </div>
 </template>
@@ -32,6 +32,9 @@
       level: {
         type: Number,
         default: 0
+      },
+      loadData: {
+        type: Function
       }
     },
     computed: {
@@ -50,13 +53,12 @@
         copy[this.level] = item
         copy.splice(this.level + 1) // 删除后面的值
         this.$emit('update:selected', copy)
-
-        if (!item.children) {
-          // 关闭弹窗
-        }
       },
       onUpdate (newSelected) {
         this.$emit('update:selected', newSelected)
+      },
+      iconVisible (item) {
+        return this.loadData ? !item.isLeaf : item.children
       }
     }
   }
@@ -84,8 +86,9 @@
       padding: .3em 1em;
       display: flex;
       align-items: center;
+
       .icon {
-        margin-left: 1em;
+        margin-left: auto;
         transform: scale(0.7);
       }
     }

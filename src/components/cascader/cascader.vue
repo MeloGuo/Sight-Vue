@@ -4,7 +4,7 @@
       {{result || '&nbsp;'}}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items class="popover" :class="[popoverClassName]" :items="source" :selected= "selected" @update:selected="onUpdate"></cascader-items>
+      <cascader-items class="popover" :class="[popoverClassName]" :items="source" :selected= "selected" @update:selected="onUpdate" :load-data="loadData"></cascader-items>
     </div>
   </div>
 </template>
@@ -94,7 +94,9 @@
           this.$emit('update:source', copy)
         }
 
-        this.loadData(lastItem, updateSource)
+        if (!lastItem.isLeaf) {
+          this.loadData && this.loadData(lastItem, updateSource)
+        }
       }
     }
   }
