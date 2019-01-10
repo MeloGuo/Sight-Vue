@@ -1,5 +1,5 @@
 <template>
-  <div class="cascader">
+  <div class="cascader" v-click-outside="close">
     <div class="trigger" @click="popoverVisible = !popoverVisible">
       {{result || '&nbsp;'}}
     </div>
@@ -11,11 +11,15 @@
 
 <script>
   import CascaderItems from './cascader-items.vue'
+  import ClickOutside from '../click-outside'
 
   export default {
     name: 'SightCascader',
     components: {
       'cascader-items': CascaderItems
+    },
+    directives: {
+      ClickOutside
     },
     props: {
       source: {
@@ -48,6 +52,9 @@
       }
     },
     methods: {
+      close () {
+        this.popoverVisible = false
+      },
       onUpdate (newSelected) {
         this.$emit('update:selected', newSelected)
 
@@ -97,7 +104,8 @@
         if (!lastItem.isLeaf) {
           this.loadData && this.loadData(lastItem, updateSource)
         }
-      }
+      },
+
     }
   }
 </script>
