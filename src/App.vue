@@ -16,7 +16,7 @@
           return item
         })
         resolve(result)
-      }, 0)
+      }, 2000)
     })
   }
 
@@ -76,13 +76,6 @@
       loadData (node, callback) {
         const {name, id, parentId} = node
         ajax(id).then(result => (callback(result)))
-      },
-      xxx () {
-        const selectedId = this.selected[0].id
-        ajax(selectedId).then((result) => {
-          let lastLevelSelected = this.dataSource.filter(item => item.id === selectedId)[0]
-          this.$set(lastLevelSelected, 'children', result)
-        })
       }
     }
   }

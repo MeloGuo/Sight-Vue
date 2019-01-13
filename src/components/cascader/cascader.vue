@@ -4,7 +4,9 @@
       {{result || '&nbsp;'}}
     </div>
     <div class="popover-wrapper" v-if="popoverVisible">
-      <cascader-items class="popover" :class="[popoverClassName]" :items="source" :selected= "selected" @update:selected="onUpdate" :load-data="loadData"></cascader-items>
+      <cascader-items class="popover" :class="[popoverClassName]" :items="source"
+        :selected= "selected" @update:selected="onUpdate" :load-data="loadData"
+        :loading-item="loadingItems"></cascader-items>
     </div>
   </div>
 </template>
@@ -43,7 +45,8 @@
     },
     data () {
       return {
-        popoverVisible: false
+        popoverVisible: false,
+        loadingItems: {}
       }
     },
     computed: {
@@ -95,14 +98,16 @@
         }
 
         const updateSource = (result) => {
+          this.loadingItems = {}
           const copy = JSON.parse(JSON.stringify(this.source))
           const toUpdate = complex(copy, lastItem.id)
           toUpdate.children = result
           this.$emit('update:source', copy)
         }
 
-        if (!lastItem.isLeaf) {
-          this.loadData && this.loadData(lastItem, updateSource)
+        if (!lastItem.isLeaf && this.loadData) {
+          this.loadData(lastItem, updateSource)
+          this.loadingItems = lastItem
         }
       },
 

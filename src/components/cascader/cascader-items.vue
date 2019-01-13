@@ -2,13 +2,21 @@
   <div class="cascaderItems">
     <div class="left">
       <div class="label" v-for="item in items" @click="onClickLabel(item)">
-        {{item.name}}
-        <s-icon v-if="iconVisible(item)" class="icon" name="right"></s-icon>
+        <span class="name">{{item.name}}</span>
+        <span class="icons">
+          <template v-if="item.name === loadingItem.name">
+            <s-icon class="icon loading" name="loading"></s-icon>
+          </template>
+          <template v-else>
+            <s-icon v-if="iconVisible(item)" class="icon" name="right"></s-icon>
+          </template>
+        </span>
       </div>
     </div>
     <div class="right" v-if="rightItems">
       <sight-cascader-items :items="rightItems" :selected="selected"
-        :level="level + 1" @update:selected="onUpdate" :load-data="loadData"></sight-cascader-items>
+        :level="level + 1" @update:selected="onUpdate" :load-data="loadData"
+        :loading-item="loadingItem"></sight-cascader-items>
     </div>
   </div>
 </template>
@@ -35,6 +43,10 @@
       },
       loadData: {
         type: Function
+      },
+      loadingItem: {
+        type: Object,
+        default: () => ({})
       }
     },
     computed: {
@@ -87,9 +99,14 @@
       display: flex;
       align-items: center;
 
-      .icon {
+      .icons {
         margin-left: auto;
-        transform: scale(0.7);
+        /*transform: scale(0.7);*/
+
+        .loading {
+          @include spin();
+          transform: scale(0.7);
+        }
       }
     }
   }
