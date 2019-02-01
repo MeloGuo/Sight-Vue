@@ -1,6 +1,6 @@
 <template>
   <div>
-    <s-pagination :total-page="totalPage" :current-page="currentPage"></s-pagination>
+    <s-pagination :total-page="totalPage" :current-page="currentPage" @click="fuck"></s-pagination>
   </div>
 </template>
 
@@ -15,7 +15,12 @@
     data () {
       return {
         totalPage: 20,
-        currentPage: 3
+        currentPage: 20
+      }
+    },
+    methods: {
+      fuck (page) {
+        this.currentPage = page
       }
     }
   }
