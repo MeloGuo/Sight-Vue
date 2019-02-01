@@ -1,6 +1,6 @@
 <template>
   <div class="sight-pagination" v-if="visible">
-    <span v-if="currentPage !== 1" class="sight-pagination-nav prev"
+    <span :class="{disabled: currentPage === 1}" class="sight-pagination-nav prev"
           @click="onClickPage(currentPage - 1)">
       <s-icon name="left"></s-icon>
     </span>
@@ -15,7 +15,7 @@
         <span class="sight-pagination-item other" @click="onClickPage(page)">{{page}}</span>
       </template>
     </template>
-    <span v-if="currentPage !== totalPage" class="sight-pagination-nav next"
+    <span :class="{disabled: currentPage === totalPage}" class="sight-pagination-nav next"
           @click="onClickPage(currentPage + 1)">
       <s-icon name="right"></s-icon>
     </span>
@@ -107,7 +107,10 @@
     },
     methods: {
       onClickPage (page) {
-        this.$emit('update:currentPage', page)
+        console.log(page)
+        if (page >= 1 && page <= this.totalPage) {
+          this.$emit('update:currentPage', page)
+        }
       }
     }
   }
@@ -163,10 +166,11 @@
       height: $height;
       border-radius: $border-radius;
       font-size: $font-size;
+      cursor: pointer;
 
       &.disabled {
         svg {
-          cursor: default;
+          cursor: not-allowed;
           fill: darken($grey, 25%);
         }
       }
