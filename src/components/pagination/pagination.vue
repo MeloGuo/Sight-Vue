@@ -1,6 +1,7 @@
 <template>
-  <div class="sight-pagination">
-    <span class="sight-pagination-nav prev" :class="{disabled: currentPage === 1}">
+  <div class="sight-pagination" v-if="visible">
+    <span v-if="currentPage !== 1" class="sight-pagination-nav prev"
+          @click="onClickPage(currentPage - 1)">
       <s-icon name="left"></s-icon>
     </span>
     <template v-for="page in pages">
@@ -11,10 +12,11 @@
         <span class="sight-pagination-item separator">...</span>
       </template>
       <template v-else>
-        <span class="sight-pagination-item other">{{page}}</span>
+        <span class="sight-pagination-item other" @click="onClickPage(page)">{{page}}</span>
       </template>
     </template>
-    <span class="sight-pagination-nav next" :class="{disabled: currentPage === totalPage}">
+    <span v-if="currentPage !== totalPage" class="sight-pagination-nav next"
+          @click="onClickPage(currentPage + 1)">
       <s-icon name="right"></s-icon>
     </span>
   </div>
@@ -42,39 +44,75 @@
         default: true
       }
     },
-    data () {
-      const pages = unique([
-        1, this.totalPage, this.currentPage, this.currentPage + 1,
-        this.currentPage + 2, this.currentPage - 1, this.currentPage - 2
-      ].filter((n) => n >= 1 && n <= this.totalPage)
-        .sort((a, b) => a - b)).reduce((prev, current, index, array) => {
-        prev.push(current)
-        array[index + 1] !== undefined && array[index + 1] - current > 1 && prev.push('...')
-        return prev
-      }, [])
+    computed: {
+      pages () {
+        const unique = (array) => {
+          const object = {}
+          const result = []
+          for (let i = 0; i < array.length; i++) {
+            if (!object[array[i]]) {
+              object[array[i]] = true
+              result.push(array[i])
+            }
+          }
+          return result
+        }
 
-      return {
-        pages
+        const makeNArray = (endNumber, startNumber = 0) => {
+          const result = new Array(endNumber - startNumber)
+          for (let i = startNumber; i < endNumber; i++) {
+            result[i] = i + 1
+          }
+          return result.filter(value => !!value)
+        }
+
+        const makePage = () => {
+          if (this.totalPage > 9) {
+            if (this.currentPage < 7) {
+              return [
+                ...makeNArray(7),
+                '...',
+                this.totalPage
+              ]
+            } else if (this.currentPage > this.totalPage - 5) {
+              return [
+                1,
+                '...',
+                ...makeNArray(this.totalPage, this.totalPage - 7)
+              ]
+            } else {
+              return [
+                1, this.totalPage, this.currentPage, this.currentPage + 1,
+                this.currentPage + 2, this.currentPage - 1, this.currentPage - 2
+              ]
+            }
+          } else {
+            return makeNArray(this.totalPage)
+          }
+        }
+
+        const pages = makePage()
+
+        return unique(pages.filter((n) => n >= 1 && n <= this.totalPage)
+          .sort((a, b) => a - b))
+          .reduce((prev, current, index, array) => {
+            prev.push(current)
+            array[index + 1] !== undefined && array[index + 1] - current > 1 && prev.push('...')
+            return prev
+          }, [])
+      },
+      visible () {
+        return !(this.hideIfOnePage && this.totalPage === 1)
       }
     },
     methods: {
-      callback () {
-        console.log(this)
+      onClickPage (page) {
+        this.$emit('update:currentPage', page)
       }
     }
   }
 
-  function unique (array) {
-    const object = {}
-    const result = []
-    for (let i = 0; i < array.length; i++) {
-      if (!object[array[i]]) {
-        object[array[i]] = true
-        result.push(array[i])
-      }
-    }
-    return result
-  }
+
 </script>
 
 <style scoped lang="scss">
@@ -85,6 +123,7 @@
     $height: 20px;
     $font-size: 12px;
 
+    user-select: none;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -105,9 +144,11 @@
       &.separator {
         border: none;
       }
+
       &.current, &:hover {
         border-color: $blue;
       }
+
       &.current {
         cursor: default;
       }
@@ -125,6 +166,7 @@
 
       &.disabled {
         svg {
+          cursor: default;
           fill: darken($grey, 25%);
         }
       }
