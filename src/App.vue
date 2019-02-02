@@ -1,7 +1,7 @@
 <template>
   <div>
     {{currentPage}}
-    <s-pagination :total-page="totalPage" :current-page.sync="currentPage"></s-pagination>
+    <s-pagination :total-page="totalPage" :current-page.sync="currentPage" :hide-if-one-page="false" :pager-count="10"></s-pagination>
   </div>
 </template>
 
@@ -15,7 +15,7 @@
     },
     data () {
       return {
-        totalPage: 20,
+        totalPage: 100,
         currentPage: 1
       }
     }

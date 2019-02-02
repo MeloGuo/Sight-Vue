@@ -1,22 +1,35 @@
 <template>
   <div class="sight-pagination" v-if="visible">
-    <span :class="{disabled: currentPage === 1}" class="sight-pagination-nav prev"
-          @click="onClickPage(currentPage - 1)">
+    <span
+      :class="{disabled: currentPage === 1}"
+      class="sight-pagination-nav prev"
+      @click="onClickPage(currentPage - 1)">
       <s-icon name="left"></s-icon>
     </span>
-    <template v-for="page in pages">
-      <template v-if="page === currentPage">
-        <span class="sight-pagination-item current">{{page}}</span>
-      </template>
-      <template v-else-if="page === '...'">
-        <span class="sight-pagination-item separator">...</span>
-      </template>
-      <template v-else>
-        <span class="sight-pagination-item other" @click="onClickPage(page)">{{page}}</span>
-      </template>
-    </template>
-    <span :class="{disabled: currentPage === totalPage}" class="sight-pagination-nav next"
-          @click="onClickPage(currentPage + 1)">
+    <span
+      class="sight-pagination-item"
+      :class="{current: currentPage === 1}"
+      @click="onClickPage(1)">1</span>
+    <span
+      class="sight-pagination-item separator"
+      v-if="showPrevMore">...</span>
+    <span
+      v-for="page in pagers"
+      class="sight-pagination-item"
+      :class="{current: currentPage === page}"
+      @click="onClickPage(page)">{{page}}</span>
+    <span
+      class="sight-pagination-item separator"
+      v-if="showNextMore">...</span>
+    <span
+      class="sight-pagination-item"
+      :class="{current: currentPage === totalPage}"
+      v-if="totalPage !== 1"
+      @click="onClickPage(totalPage)">{{totalPage}}</span>
+    <span
+      :class="{disabled: currentPage === totalPage}"
+      class="sight-pagination-nav next"
+      @click="onClickPage(currentPage + 1)">
       <s-icon name="right"></s-icon>
     </span>
   </div>
@@ -42,6 +55,10 @@
       hideIfOnePage: {
         type: Boolean,
         default: true
+      },
+      pagerCount: {
+        type: Number,
+        default: 7
       }
     },
     data () {
@@ -51,100 +68,44 @@
       }
     },
     computed: {
-      pages () {
-        const unique = (array) => {
-          const object = {}
-          const result = []
-          for (let i = 0; i < array.length; i++) {
-            if (!object[array[i]]) {
-              object[array[i]] = true
-              result.push(array[i])
-            }
-          }
-          return result
-        }
-
-        const makeNArray = (endNumber, startNumber = 0) => {
-          const result = new Array(endNumber - startNumber)
-          for (let i = startNumber; i < endNumber; i++) {
-            result[i] = i + 1
-          }
-          return result.filter(value => !!value)
-        }
-
-        const makePage = () => {
-          if (this.totalPage > 9) {
-            if (this.currentPage < 7) {
-              return [
-                ...makeNArray(7),
-                '...',
-                this.totalPage
-              ]
-            } else if (this.currentPage > this.totalPage - 5) {
-              return [
-                1,
-                '...',
-                ...makeNArray(this.totalPage, this.totalPage - 7)
-              ]
-            } else {
-              return [
-                1, this.totalPage, this.currentPage, this.currentPage + 1,
-                this.currentPage + 2, this.currentPage - 1, this.currentPage - 2
-              ]
-            }
-          } else {
-            return makeNArray(this.totalPage)
-          }
-        }
-
-        const pages = makePage()
-
-        return unique(pages.filter((n) => n >= 1 && n <= this.totalPage)
-          .sort((a, b) => a - b))
-          .reduce((prev, current, index, array) => {
-            prev.push(current)
-            array[index + 1] !== undefined && array[index + 1] - current > 1 && prev.push('...')
-            return prev
-          }, [])
-      },
       pagers () {
-        const pagerCount = 7;
-        const halfPagerCount = (pagerCount - 1) / 2;
-        const currentPage = Number(this.currentPage);
-        const pageCount = Number(this.totalPage);
-        let showPrevMore = false;
-        let showNextMore = false;
+        const pagerCount = this.pagerCount
+        const halfPagerCount = (pagerCount - 1) / 2
+        const currentPage = Number(this.currentPage)
+        const pageCount = Number(this.totalPage)
+        let showPrevMore = false
+        let showNextMore = false
         if (pageCount > pagerCount) {
           if (currentPage > pagerCount - halfPagerCount) {
-            showPrevMore = true;
+            showPrevMore = true
           }
           if (currentPage < pageCount - halfPagerCount) {
-            showNextMore = true;
+            showNextMore = true
           }
         }
-        const array = [];
+        const array = []
         if (showPrevMore && !showNextMore) {
-          const startPage = pageCount - (pagerCount - 2);
+          const startPage = pageCount - (pagerCount - 2)
           for (let i = startPage; i < pageCount; i++) {
-            array.push(i);
+            array.push(i)
           }
         } else if (!showPrevMore && showNextMore) {
           for (let i = 2; i < pagerCount; i++) {
-            array.push(i);
+            array.push(i)
           }
         } else if (showPrevMore && showNextMore) {
           const offset = Math.floor(pagerCount / 2) - 1;
           for (let i = currentPage - offset ; i <= currentPage + offset; i++) {
-            array.push(i);
+            array.push(i)
           }
         } else {
           for (let i = 2; i < pageCount; i++) {
-            array.push(i);
+            array.push(i)
           }
         }
-        this.showPrevMore = showPrevMore;
-        this.showNextMore = showNextMore;
-        return array;
+        this.showPrevMore = showPrevMore
+        this.showNextMore = showNextMore
+        return array
       },
       visible () {
         return !(this.hideIfOnePage && this.totalPage === 1)
@@ -152,7 +113,6 @@
     },
     methods: {
       onClickPage (page) {
-        console.log(page)
         if (page >= 1 && page <= this.totalPage) {
           this.$emit('update:currentPage', page)
         }
