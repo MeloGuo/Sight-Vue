@@ -1,14 +1,19 @@
 <template>
-  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
+  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave"
+    @touchstart="onTouchStart"
+    @touchmove="onTouchMove"
+    @touchend="onTouchEnd">
     <div class="s-slides-window">
       <div class="s-slides-wrapper">
         <slot></slot>
       </div>
     </div>
     <div class="s-slides-dots">
+      <span @click="onClickDots(selectedIndex - 1)"><</span>
       <span @click="onClickDots(n - 1)" v-for="n in childrenLength" :class="{active: selectedIndex === n - 1}">
         {{n}}
       </span>
+      <span @click="onClickDots(selectedIndex + 1)">></span>
     </div>
   </div>
 </template>
@@ -33,7 +38,8 @@
       return {
         timer: null,
         childrenLength: 0,
-        lastSelectedIndex: undefined
+        lastSelectedIndex: undefined,
+        startTouch: null
       }
     },
     computed: {
@@ -71,7 +77,41 @@
       onMouseLeave () {
         this.playAutomatically()
       },
+      onTouchStart (event) {
+        this.stopPlay()
+        if (event.touches.length > 1) {return}
+        this.startTouch = event.touches[0]
+      },
+      onTouchMove (event) {
+        // console.log('touch to move', event.touches[0])
+      },
+      onTouchEnd (event) {
+        const { startTouch } = this
+        const endTouch = event.changedTouches[0]
+        const {clientX: x1, clientY: y1} = startTouch
+        const {clientX: x2, clientY: y2} = endTouch
+
+        if (endTouch.clientX > startTouch.clientX) {
+          console.log('right')
+        } else {
+          console.log('left')
+        }
+
+        const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1), 2)
+        console.log('distance', distance)
+        const deltaY = Math.abs(y2 - y1)
+        const rate = distance / deltaY
+        console.log('rate', rate)
+
+        this.playAutomatically()
+      },
       select (index) {
+        console.log('当前页面', index)
+        if (index > this.names.length - 1) {
+          index = 0
+        } else if (index < 0) {
+          index = this.names.length - 1
+        }
         this.lastSelectedIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
       },
@@ -104,7 +144,8 @@
       updateChildren () {
         const selected = this.getSelected()
         this.$children.forEach(child => {
-          child.reverse = this.selectedIndex <= this.lastSelectedIndex && (this.lastSelectedIndex !== this.names.length - 1 || this.selectedIndex !== 0)
+          // FIXME: 优化代码
+          child.reverse = ((this.selectedIndex <= this.lastSelectedIndex && (this.lastSelectedIndex !== this.names.length - 1 || this.selectedIndex !== 0)) || (this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length - 1))
           this.$nextTick(() => {
             child.selected = selected
           })
@@ -121,13 +162,40 @@
     &-window {
       overflow: hidden;
     }
+
     &-wrapper {
       position: relative;
     }
 
     &-dots {
-      > span.active {
-        color: red;
+      padding: 8px 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      > span {
+        display: inline-flex;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: #ddd;
+        align-items: center;
+        justify-content: center;
+        margin: 0 8px;
+        font-size: 12px;
+
+        &:hover {
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: black;
+          color: #fff;
+          &:hover {
+            cursor: default;
+          }
+        }
+
       }
     }
   }

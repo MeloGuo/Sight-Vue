@@ -2,13 +2,13 @@
   <div>
     <div class="swiper">
       <s-slides class="wrapper" :selected.sync="selected">
-        <s-slides-item name="1">
+        <s-slides-item name="cool">
           <div class="box">1</div>
         </s-slides-item>
-        <s-slides-item name="2">
+        <s-slides-item name="lol">
           <div class="box">2</div>
         </s-slides-item>
-        <s-slides-item name="3">
+        <s-slides-item name="haha">
           <div class="box">3</div>
         </s-slides-item>
       </s-slides>
@@ -60,7 +60,7 @@
   }
 
   .box {
-    width: 700px;
+    width: 100%;
     height: 350px;
     box-sizing: border-box;
     background-color: grey;
@@ -71,6 +71,7 @@
   }
 
   .wrapper {
-    /*width: 100%;*/
+    width: 100%;
+    margin: 0 15%;
   }
 </style>
