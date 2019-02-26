@@ -1,8 +1,8 @@
 <template>
   <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave"
-    @touchstart="onTouchStart"
-    @touchmove="onTouchMove"
-    @touchend="onTouchEnd">
+       @touchstart="onTouchStart"
+       @touchmove="onTouchMove"
+       @touchend="onTouchEnd">
     <div class="s-slides-window">
       <div class="s-slides-wrapper">
         <slot></slot>
@@ -19,6 +19,19 @@
 </template>
 
 <script>
+  import { throttle } from '../../util'
+  // const throttle = function (fn, delay) {
+  //   let timer = null
+  //   return function (...args) {
+  //     if (!timer) {
+  //       timer = setTimeout(() => {
+  //         fn.apply(this, args)
+  //         timer = null
+  //       }, delay)
+  //     }
+  //   }
+  // }
+
   export default {
     name: 'SightSlides',
     props: {
@@ -44,20 +57,23 @@
     },
     computed: {
       selectedValue () {
-        const firstName = this.$children[0].name
+        const firstName = this.children[0].name
         return this.selected || firstName
       },
       selectedIndex () {
         return this.names.indexOf(this.selectedValue)
       },
       names () {
-        return this.$children.map(child => child.name)
+        return this.children.map(child => child.name)
+      },
+      children () {
+        return this.$children.filter(child => child.$options.name === 'SightSlidesItem')
       }
     },
     mounted () {
       this.updateChildren()
       this.playAutomatically()
-      this.childrenLength = this.$children.length
+      this.childrenLength = this.children.length
     },
     updated () {
       this.updateChildren()
@@ -66,11 +82,11 @@
       this.stopPlay()
     },
     methods: {
-      onClickDots (index) {
+      onClickDots: throttle(function (index) {
         this.stopPlay()
         this.select(index)
         this.playAutomatically()
-      },
+      }),
       onMouseEnter () {
         this.stopPlay()
       },
@@ -78,6 +94,7 @@
         this.playAutomatically()
       },
       onTouchStart (event) {
+        // TODO: 支持移动端
         this.stopPlay()
         if (event.touches.length > 1) {return}
         this.startTouch = event.touches[0]
@@ -88,25 +105,24 @@
       onTouchEnd (event) {
         const { startTouch } = this
         const endTouch = event.changedTouches[0]
-        const {clientX: x1, clientY: y1} = startTouch
-        const {clientX: x2, clientY: y2} = endTouch
+        const { clientX: x1, clientY: y1 } = startTouch
+        const { clientX: x2, clientY: y2 } = endTouch
 
         if (endTouch.clientX > startTouch.clientX) {
-          console.log('right')
+          // console.log('right')
         } else {
-          console.log('left')
+          // console.log('left')
         }
 
         const distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1), 2)
-        console.log('distance', distance)
+        // console.log('distance', distance)
         const deltaY = Math.abs(y2 - y1)
         const rate = distance / deltaY
-        console.log('rate', rate)
+        // console.log('rate', rate)
 
         this.playAutomatically()
       },
       select (index) {
-        console.log('当前页面', index)
         if (index > this.names.length - 1) {
           index = 0
         } else if (index < 0) {
@@ -138,12 +154,12 @@
         this.timer = null
       },
       getSelected () {
-        const firstName = this.$children[0].name
+        const firstName = this.children[0].name
         return this.selected || firstName
       },
       updateChildren () {
         const selected = this.getSelected()
-        this.$children.forEach(child => {
+        this.children.forEach(child => {
           // FIXME: 优化代码
           child.reverse = ((this.selectedIndex <= this.lastSelectedIndex && (this.lastSelectedIndex !== this.names.length - 1 || this.selectedIndex !== 0)) || (this.lastSelectedIndex === 0 && this.selectedIndex === this.names.length - 1))
           this.$nextTick(() => {
@@ -191,6 +207,7 @@
         &.active {
           background-color: black;
           color: #fff;
+
           &:hover {
             cursor: default;
           }
