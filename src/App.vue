@@ -51,7 +51,7 @@
     padding: 0;
   }
   .box {
-    /*width: 400px;*/
+    width: 400px;
     /*width: 100%;*/
     height: 350px;
     box-sizing: border-box;
@@ -59,6 +59,6 @@
     background-color: grey;
   }
   .wrapper {
-    width: 100%;
+    /*width: 100%;*/
   }
 </style>

@@ -23,6 +23,8 @@
     },
     computed: {
       visible () {
+        console.log(`我的方向是${this.reverse ? '反向' : '正向'}`)
+        console.log(`我的名字是${this.name}`)
         return this.selected === this.name
       }
     }

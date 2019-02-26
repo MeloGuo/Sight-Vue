@@ -6,7 +6,7 @@
       </div>
     </div>
     <div class="s-slides-dots">
-      <span @click="onClickDots(n - 1)" v-for="n in childrenLength" :class="{active: selectedIndex === n - 1}">
+      <span @click="onClickDots(n - 1)" @mouseenter="onEnterDots" @mouseleave="onLeaveDots" v-for="n in childrenLength" :class="{active: selectedIndex === n - 1}">
         {{n}}
       </span>
     </div>
@@ -32,7 +32,8 @@
     data () {
       return {
         timer: null,
-        childrenLength: 0
+        childrenLength: 0,
+        lastSelectedIndex: undefined
       }
     },
     computed: {
@@ -56,13 +57,22 @@
       this.updateChildren()
     },
     beforeDestroy () {
-      clearInterval(this.timer)
+      this.stopPlay()
     },
     methods: {
       onClickDots (index) {
+        this.stopPlay()
         this.select(index)
+        this.playAutomatically()
+      },
+      onEnterDots () {
+        // this.stopPlay()
+      },
+      onLeaveDots () {
+        // this.playAutomatically()
       },
       select (index) {
+        this.lastSelectedIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
       },
       playAutomatically () {
@@ -76,8 +86,12 @@
           } else {
             index++
           }
-          this.$emit('update:selected', names[index])
+          this.select(index)
         }, this.autoPlayDelay)
+      },
+      stopPlay () {
+        clearInterval(this.timer)
+        this.timer = null
       },
       getSelected () {
         const firstName = this.$children[0].name
@@ -86,10 +100,10 @@
       updateChildren () {
         const selected = this.getSelected()
         this.$children.forEach(child => {
-          child.selected = selected
-          // let newIndex = this.names.indexOf(selected)
-          // let oldIndex = this.names.indexOf(child.name)
-          // child.reverse = newIndex <= oldIndex
+          child.reverse = this.selectedIndex <= this.lastSelectedIndex
+          this.$nextTick(() => {
+            child.selected = selected
+          })
         })
       }
     }
