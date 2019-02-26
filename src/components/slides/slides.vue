@@ -100,7 +100,7 @@
       updateChildren () {
         const selected = this.getSelected()
         this.$children.forEach(child => {
-          child.reverse = this.selectedIndex <= this.lastSelectedIndex
+          child.reverse = this.selectedIndex <= this.lastSelectedIndex && (this.lastSelectedIndex !== this.names.length - 1 || this.selectedIndex !== 0)
           this.$nextTick(() => {
             child.selected = selected
           })
@@ -113,7 +113,6 @@
 <style scoped lang="scss">
   .s-slides {
     display: inline-block;
-    border: 1px solid black;
 
     &-window {
       overflow: hidden;

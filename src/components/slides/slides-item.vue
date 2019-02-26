@@ -42,7 +42,7 @@
     height: 100%;
   }
   .slide-enter-active, .slide-leave-active {
-    transition: all 1s;
+    transition: all 0.6s;
   }
   .slide-enter {
     transform: translateX(100%);

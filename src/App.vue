@@ -1,16 +1,19 @@
 <template>
   <div>
-    <s-slides class="wrapper" :selected.sync="selected">
-      <s-slides-item name="1">
-        <div class="box">1</div>
-      </s-slides-item>
-      <s-slides-item name="2">
-        <div class="box">2</div>
-      </s-slides-item>
-      <s-slides-item name="3">
-        <div class="box">3</div>
-      </s-slides-item>
-    </s-slides>
+    <div class="swiper">
+      <s-slides class="wrapper" :selected.sync="selected">
+        <s-slides-item name="1">
+          <div class="box">1</div>
+        </s-slides-item>
+        <s-slides-item name="2">
+          <div class="box">2</div>
+        </s-slides-item>
+        <s-slides-item name="3">
+          <div class="box">3</div>
+        </s-slides-item>
+      </s-slides>
+    </div>
+
     <div>
       <p>之外的文字</p>
     </div>
@@ -50,14 +53,23 @@
     margin: 0;
     padding: 0;
   }
+  .swiper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
   .box {
-    width: 400px;
-    /*width: 100%;*/
+    width: 700px;
     height: 350px;
     box-sizing: border-box;
-    border: 1px solid red;
     background-color: grey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
   }
+
   .wrapper {
     /*width: 100%;*/
   }
