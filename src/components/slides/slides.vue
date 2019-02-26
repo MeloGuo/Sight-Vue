@@ -1,12 +1,12 @@
 <template>
-  <div class="s-slides">
+  <div class="s-slides" @mouseenter="onMouseEnter" @mouseleave="onMouseLeave">
     <div class="s-slides-window">
       <div class="s-slides-wrapper">
         <slot></slot>
       </div>
     </div>
     <div class="s-slides-dots">
-      <span @click="onClickDots(n - 1)" @mouseenter="onEnterDots" @mouseleave="onLeaveDots" v-for="n in childrenLength" :class="{active: selectedIndex === n - 1}">
+      <span @click="onClickDots(n - 1)" v-for="n in childrenLength" :class="{active: selectedIndex === n - 1}">
         {{n}}
       </span>
     </div>
@@ -65,17 +65,21 @@
         this.select(index)
         this.playAutomatically()
       },
-      onEnterDots () {
-        // this.stopPlay()
+      onMouseEnter () {
+        this.stopPlay()
       },
-      onLeaveDots () {
-        // this.playAutomatically()
+      onMouseLeave () {
+        this.playAutomatically()
       },
       select (index) {
         this.lastSelectedIndex = this.selectedIndex
         this.$emit('update:selected', this.names[index])
       },
       playAutomatically () {
+        if (this.timer) {
+          return
+        }
+
         const { names } = this
         const lastIndex = names.length - 1
 
