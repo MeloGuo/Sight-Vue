@@ -1,5 +1,5 @@
 <template>
-  <div class="sider">
+  <div class="sight-sider">
     <slot></slot>
   </div>
 </template>
@@ -11,7 +11,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .sider {
+  .sight-sider {
     position: relative;
   }
 </style>

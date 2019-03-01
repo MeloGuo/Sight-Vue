@@ -1,5 +1,5 @@
 <template>
-  <div class="layout" :class="layoutClass">
+  <div class="sight-layout" :class="layoutClass">
     <slot></slot>
   </div>
 </template>
@@ -10,14 +10,14 @@ export default {
   mounted () {
     this.$children.forEach((child) => {
       if (child.$options.name === 'SightSider') {
-        this.layoutClass['layout-has-sider'] = true
+        this.layoutClass['sight-layout-has-sider'] = true
       }
     })
   },
   data () {
     return {
       layoutClass: {
-        'layout-has-sider': false
+        'sight-layout-has-sider': false
       }
     }
   }
@@ -25,12 +25,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .layout {
+  .sight-layout {
     display: flex;
     flex-direction: column;
     flex-grow: 1;
 
-    &.layout-has-sider {
+    &.sight-layout-has-sider {
       flex-direction: row;
     }
   }
