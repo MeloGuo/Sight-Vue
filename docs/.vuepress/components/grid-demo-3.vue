@@ -4,7 +4,7 @@
       <s-col span="8">
         <div class="col-demo">8: 33.33%</div>
       </s-col>
-      <s-col offset="8">
+      <s-col span="8" offset="8">
         <div class="col-demo">8: 33.33%</div>
       </s-col>
     </s-row>
