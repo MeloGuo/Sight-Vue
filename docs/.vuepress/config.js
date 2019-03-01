@@ -18,9 +18,10 @@ module.exports = {
         title: '组件',
         collapsable: false,
         children: [
-          ['/components/button', '按钮'],
-          ['/components/input', '输入框'],
-          ['/components/toast', 'Toast']
+          ['/components/button', 'Button 按钮'],
+          ['/components/input', 'Input 输入框'],
+          ['/components/toast', 'Toast'],
+          ['/components/grid', 'Grid 栅格']
         ]
       }
     ]
