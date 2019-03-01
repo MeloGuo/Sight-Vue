@@ -21,7 +21,8 @@ module.exports = {
           ['/components/button', 'Button 按钮'],
           ['/components/input', 'Input 输入框'],
           ['/components/toast', 'Toast'],
-          ['/components/grid', 'Grid 栅格']
+          ['/components/grid', 'Grid 栅格'],
+          ['/components/layout', 'Layout 布局']
         ]
       }
     ]
