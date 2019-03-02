@@ -4,6 +4,11 @@ module.exports = {
   title: 'Sight Vue',
   description: 'Just playing around',
   themeConfig: {
+    nav: [
+      { text: '主页', link: '/' },
+      { text: '文档', link: '/install/' },
+      { text: 'GitHub', link: 'https://github.com/MeloGuo/Sight-Vue' },
+    ],
     displayAllHeaders: false,
     sidebar: [
       {
@@ -27,7 +32,8 @@ module.exports = {
           ['/components/popover', 'Popover'],
           ['/components/slides', 'Slides 轮播'],
           ['/components/cascader', 'Cascader'],
-          ['/components/collapse', 'Collapse']
+          ['/components/collapse', 'Collapse'],
+          ['/components/nav', 'Nav 导航']
         ]
       }
     ]
