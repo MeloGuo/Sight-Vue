@@ -26,7 +26,8 @@ module.exports = {
           ['/components/tabs', 'Tabs 标签'],
           ['/components/popover', 'Popover'],
           ['/components/slides', 'Slides 轮播'],
-          ['/components/cascader', 'Cascader']
+          ['/components/cascader', 'Cascader'],
+          ['/components/collapse', 'Collapse']
         ]
       }
     ]
