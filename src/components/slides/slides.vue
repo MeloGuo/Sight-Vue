@@ -20,18 +20,7 @@
 
 <script>
   import { throttle } from '../../util'
-  // const throttle = function (fn, delay) {
-  //   let timer = null
-  //   return function (...args) {
-  //     if (!timer) {
-  //       timer = setTimeout(() => {
-  //         fn.apply(this, args)
-  //         timer = null
-  //       }, delay)
-  //     }
-  //   }
-  // }
-
+  //
   export default {
     name: 'SightSlides',
     props: {
