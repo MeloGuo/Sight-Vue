@@ -25,7 +25,8 @@ module.exports = {
           ['/components/layout', 'Layout 布局'],
           ['/components/tabs', 'Tabs 标签'],
           ['/components/popover', 'Popover'],
-          ['/components/slides', 'Slides 轮播']
+          ['/components/slides', 'Slides 轮播'],
+          ['/components/cascader', 'Cascader']
         ]
       }
     ]
