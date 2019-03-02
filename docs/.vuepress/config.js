@@ -24,7 +24,8 @@ module.exports = {
           ['/components/grid', 'Grid 栅格'],
           ['/components/layout', 'Layout 布局'],
           ['/components/tabs', 'Tabs 标签'],
-          ['/components/popover', 'Popover']
+          ['/components/popover', 'Popover'],
+          ['/components/slides', 'Slides 轮播']
         ]
       }
     ]
