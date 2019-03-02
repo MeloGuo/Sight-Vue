@@ -4,16 +4,22 @@
 [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
 ## 介绍
+Sight Vue UI 是一个基于 Vue.js 的 UI 组件库。现在还处于开发阶段，请不要在生产环境中尝试使用。
+
+![Sight](https://i.vimeocdn.com/video/322403573_1280x720.jpg)
 
 ## 开始使用
 
+```bash
+npm install sight-vue
+```
+或`
+```bash
+yarn add sight-vue
+```
+
 ## 文档
-
-## 提问
-
-## 变更记录
-
-## 联系方式
+文档链接：http://meloguo.com/Sight-Vue/
 
 ## 贡献代码
 
