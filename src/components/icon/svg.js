@@ -1,4 +1,5 @@
 /* istanbul ignore next */
+/* eslint-disable */
 !(function (s) {
   var t
 
