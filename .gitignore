@@ -117,4 +117,7 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
+# Sight-Vue
+lib
+
 # End of https://www.gitignore.io/api/vuejs,macos,webstorm

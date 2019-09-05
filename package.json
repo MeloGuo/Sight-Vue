@@ -6,6 +6,7 @@
   "scripts": {
     "start": "vue-cli-service serve",
     "build": "vue-cli-service build --target lib --name sight src/index.js",
+    "build:theme": "node build/bin/gen-cssfile && gulp build --gulpfile packages/theme-chalk/gulpfile.js && cp-cli packages/theme-chalk/lib lib/theme-chalk",
     "lint": "vue-cli-service lint",
     "test": "standard --env mocha && cross-env BABEL_ENV=test karma start --single-run",
     "dev-test": "cross-env BABEL_ENV=test karma start",
