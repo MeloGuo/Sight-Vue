@@ -21,7 +21,7 @@ themes.forEach(theme => {
   let importContent = isScss ? '@import "./base.scss";\n' : '@import "./base.css";\n'
 
   Components.forEach(key => {
-    if (['icon']).indexOf(key) > -1) return;
+    if (['icon'].indexOf(key) > -1) return
     const fileName = key + (isScss ? '.scss' : '.css')
     importContent += '@import "./' + fileName + '";\n'
     const filePath = path.resolve(basepath, theme, 'src', fileName)
