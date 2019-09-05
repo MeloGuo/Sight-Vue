@@ -1,0 +1,27 @@
+{
+  "name": "sight-theme-chalk",
+  "version": "0.1.0",
+  "description": "Sight component chalk theme.",
+  "main": "lib/index.css",
+  "style": "lib/index.css",
+  "files": [
+    "lib",
+    "src"
+  ],
+  "scripts": {
+    "build": "gulp build"
+  },
+  "keywords": [
+    "sight",
+    "theme"
+  ],
+  "author": "MeloGuo",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-autoprefixer": "^7.0.0",
+    "gulp-cssmin": "^0.2.0",
+    "gulp-sass": "^4.0.2"
+  },
+  "dependencies": {}
+}
