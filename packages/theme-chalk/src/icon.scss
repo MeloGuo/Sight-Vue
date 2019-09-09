@@ -3,7 +3,7 @@
 @font-face {
   font-family: 'sight-icons';
   src: url('#{$--font-path}/sight-icons.woff') format('woff'), /* chrome, firefox */
-        url('#{$--font-path}/sight-icons.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
+       url('#{$--font-path}/sight-icons.ttf') format('truetype'); /* chrome, firefox, opera, Safari, Android, iOS 4.2+*/
   font-weight: normal;
   font-display: $--font-display;
   font-style: normal;
@@ -25,6 +25,10 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.s-icon-error:before {
+.s-icon-error::before {
   content: '\e620';
+}
+
+.s-icon-loading::before {
+  content: '\e721';
 }

@@ -3,12 +3,14 @@
     class="s-button"
     @click="handleClick"
     :class="[
-      `icon-${this.iconPosition}`,
+      `s-icon--${this.iconPosition}`,
       {
         'is-disabled': this.disabled
       }
     ]"
   >
+    <i class="s-icon-loading" v-if="loading"></i>
+    <i :class="icon" v-if="icon && !loading"></i>
     <span v-if="$slots.default"><slot></slot></span>
   </button>
 </template>

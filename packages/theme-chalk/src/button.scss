@@ -4,7 +4,9 @@
 @import "mixins/mixins";
 
 @include b(button) {
-  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   white-space: nowrap;
   cursor: pointer;
   background: $--button-default-background-color;
@@ -34,9 +36,27 @@
     outline: none;
   }
 
-  & [class*="s-icon-"] {
-    & + span {
-      margin-left: 5px;
+  &.s-icon-- {
+    @at-root #{&}left {
+      & [class*="s-icon-"] {
+        order: 1;
+  
+        & + span {
+          order: 2;
+          margin-left: $--icon-margin;
+        }
+      }
+    }
+
+    @at-root #{&}right {
+      & [class*="s-icon-"] {
+        order: 2;
+  
+        & + span {
+          order: 1;
+          margin-right: $--icon-margin;
+        }
+      }
     }
   }
 
@@ -56,6 +76,7 @@
   }
 
   @include when(loading) {
-    
+    position: relative;
+    pointer-events: none;
   }
 }
