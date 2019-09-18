@@ -1,9 +1,20 @@
-export { default as Button } from './components/button/button'
-export { default as ButtonGroup } from './components/button/button-group'
-export { default as Col } from './components/grid/col'
-export { default as Row } from './components/grid/row'
-export { default as Collapse } from './components/collapse/collapse'
-export { default as CollapseItem } from './components/collapse/collapse-item'
-export { default as Icon } from './components/icon/icon'
-export { default as Input } from './components/input/input'
-export { default as Validate } from './components/validate/validate'
+import Button from '../packages/button/index.js'
+
+const components = [
+  Button
+]
+
+const install = function (Vue, opts = {}) {
+  components.forEach(component => Vue.component(component.name, component))
+}
+
+// when developer download Vue with a script tag
+if (typeof window !== 'undefined' && window.Vue) {
+  install(window.Vue)
+}
+
+export default {
+  version: '0.0.3',
+  install,
+  Button
+}

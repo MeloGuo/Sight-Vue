@@ -17,7 +17,7 @@
 
 <script>
 export default {
-  name: 'SightButton',
+  name: 'SButton',
   props: {
     icon: {
       type: String,
