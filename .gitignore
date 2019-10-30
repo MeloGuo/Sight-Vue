@@ -117,7 +117,15 @@ fabric.properties
 # Sonarlint plugin
 .idea/sonarlint
 
-# Sight-Vue
+### Sight-Vue ###
 lib
+
+### Node ###
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
 
 # End of https://www.gitignore.io/api/vuejs,macos,webstorm
